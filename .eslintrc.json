@@ -5,7 +5,8 @@
     },
     "extends": [
         "standard-with-typescript",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "plugin:tailwindcss/recommended"
     ],
     "parserOptions": {
         "ecmaVersion": "latest",
@@ -16,6 +17,7 @@
     ],
     "rules": {
         "@typescript-eslint/explicit-function-return-type": "off",
-        "react/react-in-jsx-scope": "off"
+        "react/react-in-jsx-scope": "off",
+        "@typescript-eslint/space-before-function-paren": "off"
     }
 }
