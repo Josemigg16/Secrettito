@@ -3,15 +3,9 @@ import { useSession } from "next-auth/react"
 import useChooseLanguage from "./hooks/useChooseLang"
 import SessionButton from "@/components/SessionButton"
 import Instagram from "@public/icons/Instagram"
+import { BarlowCondensed } from "@/fonts/fonts"
 import { Divider } from "@nextui-org/react"
-import { Barlow_Condensed } from "next/font/google"
 import { signIn } from "next-auth/react"
-
-const BarlowCondensed = Barlow_Condensed({
-  subsets: ["latin"],
-  weight: ["500", "700", "800"],
-  display: "swap",
-})
 
 export default function Home() {
   const { setLang, dict, ChooseLanguage } = useChooseLanguage({
@@ -31,7 +25,7 @@ export default function Home() {
         <ChooseLanguage className="mr-5" setLang={setLang} />
       </header>
       <section className="grid h-full md:grid-cols-3">
-        <div className="hidden md:block"></div>
+        <div className="hidden lg:block"></div>
         <div className="flex items-center">
           <article className="mx-5 h-96 w-full rounded-lg bg-white p-5 border-gray-300 border-1 shadow-lg">
             <h2 className="text-center font-bold uppercase text-3xl mt-4 h-[72px]">
