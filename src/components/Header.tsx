@@ -1,5 +1,6 @@
 import { SetStateAction } from "react"
 import { Dispatch } from "react"
+import Link from "next/link"
 import { signOut } from "next-auth/react"
 import { Divider } from "@nextui-org/react"
 import FaBars from "@public/icons/FaBars"
@@ -43,7 +44,7 @@ function Header({ setLang, ChooseLanguage }: Props) {
         id="overlay"
         className="h-full w-full bg-black opacity-60 top-0 z-20 absolute hidden"
       ></div>
-      <header className="absolute flex justify-end items-center top-0 h-24 w-full gap-3">
+      <header className="absolute flex justify-center items-center top-0 h-24 w-full gap-3">
         <label
           htmlFor="toggle-aside"
           id="toggle-aside-label"
@@ -51,12 +52,18 @@ function Header({ setLang, ChooseLanguage }: Props) {
         >
           <FaBars className="relative" />
         </label>
-        <input type="checkbox" id="toggle-aside" onChange={() => showAside()} />
+        <Link href='/dashboard' className="text-2xl uppercase font-bold ">Secrettito</Link>
+        <input
+          type="checkbox"
+          id="toggle-aside"
+          hidden
+          onChange={() => showAside()}
+        />
         <aside className="absolute left-0 top-0 h-screen w-60 bg-green-400 -translate-x-60 transition-transform z-30">
           <ul className="mt-24">
-            <button className="w-full text-center hover:bg-green-600 py-2">
+            <Link href='/settings' className="block w-full text-center hover:bg-green-600 py-2">
               Configuración
-            </button>
+            </Link>
             <Divider />
             <button
               className="text-center w-full hover:bg-green-600 py-2"
@@ -70,7 +77,7 @@ function Header({ setLang, ChooseLanguage }: Props) {
             </button>
           </ul>
         </aside>
-        <ChooseLanguage className="-left-2" setLang={setLang} />
+        <ChooseLanguage className="right-0 absolute" setLang={setLang} />
       </header>
     </>
   )
