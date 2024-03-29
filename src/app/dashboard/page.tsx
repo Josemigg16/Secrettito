@@ -1,4 +1,5 @@
 "use client"
+import { useSession } from "next-auth/react"
 import { signOut } from "next-auth/react"
 import { Divider } from "@nextui-org/react"
 import useChooseLanguage from "../hooks/useChooseLang"
@@ -6,6 +7,8 @@ import FaBars from "@public/icons/FaBars"
 
 function Page() {
   const { dict, setLang, ChooseLanguage } = useChooseLanguage({})
+  const { data: session } = useSession()
+  console.log(session)
   const showAside = () => {
     const $aside = document.querySelector("aside")
     const $label = document.querySelector("#toggle-aside-label")
@@ -49,7 +52,11 @@ function Page() {
             <Divider />
             <button
               className="text-center w-full hover:bg-green-600 py-2"
-              onClick={() => signOut()}
+              onClick={() =>
+                signOut({
+                  callbackUrl: "/",
+                })
+              }
             >
               Sign Out
             </button>
