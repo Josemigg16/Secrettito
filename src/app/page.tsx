@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react"
 import useChooseLanguage from "./hooks/useChooseLang"
 import SessionButton from "@/components/SessionButton"
 import Instagram from "@public/icons/Instagram"
+import Google from "@public/icons/Google"
 import { BarlowCondensed } from "@/fonts/fonts"
 import { Divider } from "@nextui-org/react"
 import { signIn } from "next-auth/react"
@@ -44,7 +45,7 @@ export default function Home() {
                   <SessionButton
                     onClick={() => signIn("google")}
                     className="w-full h-14 bg-gg gradient-hover transition-background"
-                    Icon={Instagram}
+                    Icon={Google}
                   >
                     <p className="text-xl text-gray-100">{dict.signInWithGg}</p>
                   </SessionButton>
