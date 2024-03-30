@@ -2,11 +2,18 @@
 import { useSession } from "next-auth/react"
 import useChooseLanguage from "../hooks/useChooseLang"
 import Header from "@/components/Header"
+import { createUser } from "@/libs/createUser"
+import { useEffect, useState } from "react"
 
 export default function Page() {
   const { dict, setLang, ChooseLanguage } = useChooseLanguage({})
   const { data: session } = useSession()
-  console.log(session)
+
+  useEffect(() => {
+    if (session) {
+      createUser(session?.user)
+    }
+  }, [session])
 
   return (
     <main className="">
