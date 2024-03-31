@@ -16,9 +16,10 @@ interface Props {
     className,
     setLang,
   }: ChooseLanguageArguments) => JSX.Element
+  className?: string
 }
 
-function Header({ setLang, ChooseLanguage }: Props) {
+function Header({ setLang, ChooseLanguage, className }: Props) {
   const showAside = () => {
     const $aside = document.querySelector("aside")
     const $label = document.querySelector("#toggle-aside-label")
@@ -44,7 +45,9 @@ function Header({ setLang, ChooseLanguage }: Props) {
         id="overlay"
         className="h-full w-full bg-black opacity-60 top-0 z-20 absolute hidden"
       ></div>
-      <header className="absolute flex justify-center items-center top-0 h-24 w-full gap-3">
+      <header
+        className={`${className} flex justify-center items-center top-0 h-24 w-full gap-3`}
+      >
         <label
           htmlFor="toggle-aside"
           id="toggle-aside-label"
@@ -52,7 +55,9 @@ function Header({ setLang, ChooseLanguage }: Props) {
         >
           <FaBars className="relative" />
         </label>
-        <Link href='/dashboard' className="text-2xl uppercase font-bold ">Secrettito</Link>
+        <Link href="/dashboard" className="text-4xl uppercase font-bold ">
+          Secrettito
+        </Link>
         <input
           type="checkbox"
           id="toggle-aside"
@@ -61,7 +66,10 @@ function Header({ setLang, ChooseLanguage }: Props) {
         />
         <aside className="absolute left-0 top-0 h-screen w-60 bg-green-400 -translate-x-60 transition-transform z-30">
           <ul className="mt-24">
-            <Link href='/settings' className="block w-full text-center hover:bg-green-600 py-2">
+            <Link
+              href="/settings"
+              className="block w-full text-center hover:bg-green-600 py-2"
+            >
               Configuración
             </Link>
             <Divider />
