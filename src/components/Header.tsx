@@ -55,7 +55,10 @@ function Header({ setLang, ChooseLanguage, className }: Props) {
         >
           <FaBars className="relative" />
         </label>
-        <Link href="/dashboard" className="text-4xl uppercase font-bold ">
+        <Link
+          href="/dashboard"
+          className="text-4xl uppercase font-bold hidden sm:inline"
+        >
           Secrettito
         </Link>
         <input
