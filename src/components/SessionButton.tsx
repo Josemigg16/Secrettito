@@ -3,11 +3,13 @@ interface Props {
   Icon: any
   onClick: () => void
   children: React.ReactNode
+  disabled?: boolean
 }
 
-function SessionButton({ className, Icon, onClick, children }: Props) {
+function SessionButton({ className, Icon, onClick, children, disabled }: Props) {
   return (
     <button
+      disabled={disabled}
       onClick={() => onClick()}
       className={`${className} relative border-gray-200 border-2 rounded-full`}
     >
