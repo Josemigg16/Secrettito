@@ -1,4 +1,3 @@
-import makeURL from "@/helpers/makeURL"
 import randomString from "@/helpers/randomString"
 import { PrismaClient } from "@prisma/client"
 import { NextResponse } from "next/server"
@@ -6,6 +5,7 @@ import { NextResponse } from "next/server"
 export async function POST(req: Request) {
   const prisma = new PrismaClient()
   const body = await req.json()
+  const link = randomString()
   try {
     const post = await prisma.post.create({
       data: {
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
             email: body.email,
           },
         },
-        link: randomString(),
+        link,
       },
     })
 
