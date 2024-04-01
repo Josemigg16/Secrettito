@@ -1,8 +1,8 @@
 import { PrismaClient } from '@prisma/client'
-import { NextResponse } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
 const prisma = new PrismaClient()
 
-export async function GET (req) {
+export async function GET (req: NextRequest) {
   const url = getParams(req.nextUrl.pathname)
 
   try {
@@ -21,7 +21,7 @@ export async function GET (req) {
   }
 }
 
-export async function PATCH (req) {
+export async function PATCH (req: NextRequest) {
   const id = getParams(req.nextUrl.pathname)
   const body = await req.json()
   try {
@@ -43,7 +43,7 @@ export async function PATCH (req) {
   }
 }
 
-const getParams = (pathname) => {
+const getParams = (pathname: string) => {
   const segments = pathname.split('/')
   return segments[segments.length - 1]
 }
