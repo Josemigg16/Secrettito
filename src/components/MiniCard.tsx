@@ -7,9 +7,14 @@ import {
   Divider,
   Link,
 } from "@nextui-org/react"
-import type { Post } from "@prisma/client"
 
-export default function PostMiniCard({ title, content, url }: Post) {
+interface Props {
+  title: string | null
+  content: string | null
+  url: string | null
+}
+
+export default function PostMiniCard({ title, content, url }: Props) {
   const router = useRouter()
 
   return (

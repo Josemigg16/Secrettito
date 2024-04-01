@@ -49,10 +49,8 @@ export default function Page() {
           {posts?.map((post: Post) => (
             <PostMiniCard
               key={post.id}
-              id={post.id}
               title={post.title}
               content={post.content}
-              authorId={post.authorId}
               url={post.url}
             />
           ))}
