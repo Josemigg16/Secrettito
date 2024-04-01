@@ -60,7 +60,7 @@ export default function PostBigCard({
           {!success ? (
             <>
               <CardBody className="min-h-12">
-                {content?.split("\n").map((line, index) => (
+                {content?.split("\n")?.map((line, index) => (
                   <p key={index} className="text-base">
                     {line}
                   </p>
