@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react"
 import { BarlowCondensed } from "@/fonts/fonts"
 import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
-import PostBigCard from "@/components/postBigCard"
+import PostBigCard from "@/components/PostBigCard"
 import type { ExtendedPost } from "@/types"
 
 export default function Page({}) {
