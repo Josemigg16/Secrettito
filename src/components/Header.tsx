@@ -2,8 +2,9 @@ import { SetStateAction } from "react"
 import { Dispatch } from "react"
 import Link from "next/link"
 import { signOut } from "next-auth/react"
-import { Divider } from "@nextui-org/react"
+import { Divider, button } from "@nextui-org/react"
 import FaBars from "@public/icons/FaBars"
+import { Session } from "next-auth"
 
 interface ChooseLanguageArguments {
   className: string
@@ -17,9 +18,10 @@ interface Props {
     setLang,
   }: ChooseLanguageArguments) => JSX.Element
   className?: string
+  session: Session | null
 }
 
-function Header({ setLang, ChooseLanguage, className }: Props) {
+function Header({ setLang, ChooseLanguage, className, session }: Props) {
   const showAside = () => {
     const $aside = document.querySelector("aside")
     const $label = document.querySelector("#toggle-aside-label")
@@ -48,16 +50,20 @@ function Header({ setLang, ChooseLanguage, className }: Props) {
       <header
         className={`${className} flex justify-center items-center top-0 h-24 w-full gap-3`}
       >
-        <label
-          htmlFor="toggle-aside"
-          id="toggle-aside-label"
-          className="cursor-pointer absolute w-20 h-[4.8rem] transition-[100ms] rounded-full flex items-center left-0 z-50 border-none hover:scale-110"
-        >
-          <FaBars className="relative" />
-        </label>
+        {session ? (
+          <label
+            htmlFor="toggle-aside"
+            id="toggle-aside-label"
+            className="cursor-pointer absolute w-20 h-[4.8rem] transition-[100ms] rounded-full flex items-center left-0 z-50 border-none hover:scale-110"
+          >
+            <FaBars className="relative" />
+          </label>
+        ) : (
+          <></>
+        )}
         <Link
-          href="/dashboard"
-          className="text-4xl uppercase font-bold hidden sm:inline"
+          href={session ? "/dashboard" : "/"}
+          className="h-full text-4xl uppercase font-bold hidden sm:flex items-center hover:scale-110 transition-transform"
         >
           Secrettito
         </Link>
@@ -70,7 +76,7 @@ function Header({ setLang, ChooseLanguage, className }: Props) {
         <aside className="absolute left-0 top-0 h-screen w-60 bg-green-400 -translate-x-60 transition-transform z-30">
           <ul className="mt-24">
             <Link
-              href="/settings"
+              href="/settings/account"
               className="block w-full text-center hover:bg-green-600 py-2"
             >
               Configuración
@@ -88,7 +94,10 @@ function Header({ setLang, ChooseLanguage, className }: Props) {
             </button>
           </ul>
         </aside>
-        <ChooseLanguage className="right-0 absolute" setLang={setLang} />
+        <ChooseLanguage
+          className="right-3 absolute hover:scale-110 transition-transform-opacity"
+          setLang={setLang}
+        />
       </header>
     </>
   )
