@@ -1,10 +1,14 @@
 import { PrismaClient } from "@prisma/client"
 import { NextResponse } from "next/server"
 
+interface Link {
+  link: string
+}
+
 export async function POST(req: Request) {
   const prisma = new PrismaClient()
   const body = await req.json()
-  const link = randomString()
+  const link = randomString() as keyof Link
   try {
     const post = await prisma.post.create({
       data: {
