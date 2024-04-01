@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
     })
     return NextResponse.json(userPosts?.posts)
   } catch (error) {
-    return NextResponse.json({ message: "User not deleted" })
+    return NextResponse.json({ message: "Cannot get posts" })
   }
 }
 
