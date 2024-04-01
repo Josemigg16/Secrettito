@@ -7,10 +7,10 @@ import {
   Divider,
   Link,
 } from "@nextui-org/react"
-import type { Post } from "@prisma/client"
+import type { ExtendedPost } from "@/types"
 
 interface Props {
-  post: Post
+  post: ExtendedPost
 }
 
 export default function PostMiniCard({ post }: Props) {

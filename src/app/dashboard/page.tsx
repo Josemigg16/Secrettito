@@ -6,7 +6,7 @@ import CreatePost from "@/components/CreatePost"
 import PostMiniCard from "@/components/MiniCard"
 import { BarlowCondensed } from "@/fonts/fonts"
 import { useEffect, useState } from "react"
-import type { Post } from "@prisma/client"
+import type { ExtendedPost } from "@/types"
 
 export default function Page() {
   const [created, setCreated] = useState(false)
@@ -46,7 +46,7 @@ export default function Page() {
             created={created}
             setCreated={setCreated}
           />
-          {posts?.map((post: Post) => (
+          {posts?.map((post: ExtendedPost) => (
             <PostMiniCard
               key={post.id}
               post={post}
