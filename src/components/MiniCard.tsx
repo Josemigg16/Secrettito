@@ -7,29 +7,28 @@ import {
   Divider,
   Link,
 } from "@nextui-org/react"
+import type { Post } from "@prisma/client"
 
 interface Props {
-  title: string | null
-  content: string | null
-  url: string | null
+  post: Post
 }
 
-export default function PostMiniCard({ title, content, url }: Props) {
+export default function PostMiniCard({ post }: Props) {
   const router = useRouter()
 
   return (
     <button
-    onClick={()=> router.push(`/dashboard/${url}`)}
+    onClick={()=> router.push(`/dashboard/${post?.url}`)}
     className="w-full block">
       <Card id="post-card" className="max-w-[450px] cursor-pointer">
         <CardHeader className="flex gap-3">
           <div className="flex flex-col">
-            <p className="text-xl">{title}</p>
+            <p className="text-xl">{post.title}</p>
           </div>
         </CardHeader>
         <Divider />
         <CardBody>
-          <p>{content}</p>
+          <p>{post.content}</p>
         </CardBody>
         <Divider />
         <CardFooter>
