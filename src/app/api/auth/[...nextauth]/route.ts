@@ -15,8 +15,8 @@ const handler = NextAuth({
   callbacks: {
     async session({ session }) {
       const prisma = new PrismaClient()
-      const name = session.user?.name
-      const email = session.user?.email
+      const name = session.user!.name
+      const email = session.user!.email
       const username = "user" + Math.floor(Math.random() * 100000).toString()
       try {
         const exists = await prisma.user.findFirst({
