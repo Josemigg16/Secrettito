@@ -25,10 +25,10 @@ model Post {
   id       String    @id @default(uuid())
   title    String
   content  String?
+  link     String
   messages Message[]
   author   User?     @relation(fields: [authorId], references: [id])
   authorId String?
-  link     String
 }
 
 model Message {

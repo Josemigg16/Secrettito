@@ -10,12 +10,12 @@ export async function POST(req: Request) {
       data: {
         title: body.title,
         content: body.content,
+        link,
         author: {
           connect: {
             email: body.email,
           },
         },
-        link,
       },
     })
 
