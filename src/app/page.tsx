@@ -36,7 +36,9 @@ export default function Home() {
                 <Divider className="my-8" />
                 <section className="space-y-1">
                   <SessionButton
-                    onClick={() => signIn("google")}
+                    onClick={() => signIn("google", {
+                      callbackUrl: "/dashboard",
+                    })}
                     className="w-full h-14 bg-gg gradient-hover transition-background"
                     Icon={Google}
                   >
