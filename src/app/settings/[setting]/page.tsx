@@ -28,11 +28,11 @@ export default function Page() {
     <main
       className={`${BarlowCondensed.className} h-screen bg-ig overflow-y-hidden`}
     >
-      <Header setLang={setLang} ChooseLanguage={ChooseLanguage} />
+      <Header setLang={setLang} ChooseLanguage={ChooseLanguage} session={session}/>
       <section className="h-5/6 flex items-center overflow-y-hidden">
         <div className="w-5/6 max-w-[720px] min-w-72 bg-white h-5/6 mx-auto rounded">
           <h2 className="text-5xl font-bold pl-8 pt-8">Configuración</h2>
-          <div className=" rounded h-full grid grid-cols-12">
+          <div className="rounded h-full grid grid-cols-12">
             <article className="w-full col-start-1 col-end-11 p-6 text-3xl">
               <section>
                 {path === "/settings/account" ? (
