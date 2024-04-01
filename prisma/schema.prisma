@@ -28,7 +28,6 @@ model Post {
   messages Message[]
   author   User?     @relation(fields: [authorId], references: [id])
   authorId String?
-  link     String
 }
 
 model Message {
