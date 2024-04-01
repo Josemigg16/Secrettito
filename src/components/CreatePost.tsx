@@ -1,4 +1,4 @@
-import makeURL from '@/helpers/makeURL'
+import makeURL from "@/helpers/makeURL"
 import {
   Modal,
   ModalContent,
@@ -9,41 +9,41 @@ import {
   useDisclosure,
   Input,
   Textarea,
-  Spinner
-} from '@nextui-org/react'
-import { type Session } from 'next-auth'
-import { type FormEvent, useState } from 'react'
-import Link from 'next/link'
-import ToClipboard from '@public/icons/ToClipboard'
-import Share from '@public/icons/Share'
+  Spinner,
+} from "@nextui-org/react"
+import { type Session } from "next-auth"
+import { type FormEvent, useState } from "react"
+import Link from "next/link"
+import ToClipboard from "@public/icons/ToClipboard"
+import Share from "@public/icons/Share"
 
 interface CreatePostProps {
-  classname?: string
-  session: Session | null
-  created: boolean
-  setCreated: React.Dispatch<React.SetStateAction<boolean>>
+  classname?: string;
+  session: Session | null;
+  created: boolean;
+  setCreated: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function CreatePost ({
+export default function CreatePost({
   classname,
   session,
   created,
-  setCreated
+  setCreated,
 }: CreatePostProps) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure()
 
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
+  const [title, setTitle] = useState("")
+  const [content, setContent] = useState("")
   const [invalidTextarea, setInvalidTextarea] = useState(false)
   const [creating, setCreating] = useState(false)
-  const [url, setURL] = useState('')
+  const [url, setURL] = useState("")
   const email = session?.user?.email
 
   const clearState = () => {
     setCreating(false)
-    setTitle('')
-    setContent('')
-    setURL('')
+    setTitle("")
+    setContent("")
+    setURL("")
     setInvalidTextarea(false)
   }
 
@@ -60,11 +60,11 @@ export default function CreatePost ({
       return
     }
     setCreating(true)
-    const res = await fetch('/api/create-post', {
-      method: 'POST',
-      body: JSON.stringify({ title, content, email })
+    const res = await fetch("/api/create-post", {
+      method: "POST",
+      body: JSON.stringify({ title, content, email }),
     })
-    const postLink = await res.json() as string
+    const postLink = (await res.json()) as string
     setCreating(false)
     setURL(makeURL(postLink))
     setCreated(true)
@@ -74,51 +74,51 @@ export default function CreatePost ({
     <>
       <Button
         variant="bordered"
-        className="rounded-2xl w-full text-2xl h-36 text-white"
+        className="h-36 w-full rounded-2xl text-2xl text-white"
         onPress={onOpen}
       >
         Crear nueva publicacion
       </Button>
       <Modal
-        className="absolute top-24 w-10/12 min-h-[392px]"
+        className="absolute top-24 min-h-[392px] w-10/12"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
       >
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1 text-xl pt-6">
-                {created ? 'Publicación creada!' : 'Nueva publicación'}
+              <ModalHeader className="flex flex-col gap-1 pt-6 text-xl">
+                {created ? "Publicación creada!" : "Nueva publicación"}
               </ModalHeader>
-              {creating
-                ? (
+              {creating ? (
                 <>
                   <Spinner color="default" className="h-[260px]" />
                 </>
-                  )
-                : (
+              ) : (
                 <ModalBody>
-                  {!created
-                    ? (
+                  {!created ? (
                     <form onSubmit={handleSubmit} className="space-y-6 pb-12">
                       <Input
                         value={title}
                         label="Título"
-                        onChange={(e) => { setTitle(e.target.value) }}
+                        onChange={(e) => {
+                          setTitle(e.target.value)
+                        }}
                       />
                       <Textarea
                         isInvalid={invalidTextarea}
                         errorMessage={
-                          invalidTextarea ? 'Debe llenar este campo' : ''
+                          invalidTextarea ? "Debe llenar este campo" : ""
                         }
                         value={content}
                         maxLength={150}
                         label="Contenido"
-                        onChange={(e) => { setContent(e.target.value) }}
+                        onChange={(e) => {
+                          setContent(e.target.value)
+                        }}
                       />
                     </form>
-                      )
-                    : (
+                  ) : (
                     <>
                       <article>
                         <h3 className="text-lg">
@@ -126,13 +126,13 @@ export default function CreatePost ({
                         </h3>
                         <strong>Contenido</strong>:
                         <p className="overflow-auto">{content}</p>
-                        <p className="flex flex-wrap mt-6">
+                        <p className="mt-6 flex flex-wrap">
                           <strong className="mr-2">Ir:</strong>
                           <Link className="hover:underline" href={url}>
                             {url}
                           </Link>
                         </p>
-                        <footer className="flex flex-col gap-2 mt-3">
+                        <footer className="mt-3 flex flex-col gap-2">
                           <Button>
                             <ToClipboard className="absolute left-6" />
                             Copiar
@@ -144,9 +144,9 @@ export default function CreatePost ({
                         </footer>
                       </article>
                     </>
-                      )}
-                </ModalBody>
                   )}
+                </ModalBody>
+              )}
               <ModalFooter>
                 <Button
                   isDisabled={creating}
@@ -161,7 +161,9 @@ export default function CreatePost ({
                   className="bg-ig hover:gradient-hover text-white"
                   onPress={
                     !created
-                      ? async () => { await handleSubmit(null) }
+                      ? async () => {
+                          await handleSubmit(null)
+                        }
                       : () => {
                           clearState()
                           setCreated(false)
