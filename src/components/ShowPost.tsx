@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
-import { usePathname } from "next/navigation"
-import { useEffect, useState } from "react"
+import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import {
   Card,
   CardHeader,
@@ -8,17 +8,17 @@ import {
   CardFooter,
   Divider,
   Link,
-} from "@nextui-org/react"
-import type { Session } from "next-auth"
-import type { ExtenderedPost } from "@/types"
+} from '@nextui-org/react'
+import type { Session } from 'next-auth'
+import type { ExtenderedPost } from '@/types'
 
 interface Props {
-  session: Session | null;
+  session: Session | null
 }
 
 export default function ShowPost({ session }: Props) {
   const pathname = usePathname()
-  const [, , url] = pathname?.split("/")
+  const [, , url] = pathname?.split('/')
   const [post, setPost] = useState({} as ExtenderedPost)
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function ShowPost({ session }: Props) {
   }, [session])
 
   return (
-    <article className="col-start-2 col-end-6 border-gray-200 border-dashed border-2 rounded-xl hidden md:flex items-center justify-center">
+    <>
       <Card className="max-w-[450px] cursor-pointer">
         <CardHeader className="flex gap-3">
           <div className="flex flex-col">
@@ -65,6 +65,6 @@ export default function ShowPost({ session }: Props) {
           </Link>
         </CardFooter>
       </Card>
-    </article>
+    </>
   )
 }

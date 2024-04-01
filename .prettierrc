@@ -2,5 +2,6 @@
     "plugins": [
         "prettier-plugin-tailwindcss"
     ],
-    "semi": false
+    "semi": false,
+    "singleQuote": true
 }
