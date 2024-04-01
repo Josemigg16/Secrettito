@@ -19,7 +19,7 @@ import {
 import { usePathname } from 'next/navigation'
 
 export default function Page () {
-  const { dict, setLang, ChooseLanguage } = useChooseLanguage({})
+  const { setLang, ChooseLanguage } = useChooseLanguage({})
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
   const path = usePathname()
   const { data: session } = useSession()

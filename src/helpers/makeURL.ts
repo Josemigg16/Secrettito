@@ -1,3 +1,3 @@
-export default function makeURL(url: string) {
-    return `${window.location.origin}/${url}`;
+export default function makeURL (url: string) {
+  return `${window.location.origin}/${url}`
 }

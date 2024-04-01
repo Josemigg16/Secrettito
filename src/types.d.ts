@@ -1,4 +1,4 @@
-import type { Post, Message } from "@prisma/client"
+import type { Post, Message } from '@prisma/client'
 
 export interface ExtendedPost extends Post {
   author: User

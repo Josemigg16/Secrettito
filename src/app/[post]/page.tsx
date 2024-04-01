@@ -12,7 +12,7 @@ import type { ExtendedPost } from '@/types'
 import type { SetStateAction } from 'react'
 
 export default function Page () {
-  const { setLang, dict, ChooseLanguage } = useChooseLanguage({
+  const { setLang, ChooseLanguage } = useChooseLanguage({
     registerMessage: '',
     signInWithIg: '',
     signInWithGg: ''

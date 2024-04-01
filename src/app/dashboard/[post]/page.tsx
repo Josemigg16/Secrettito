@@ -13,7 +13,7 @@ import type { SetStateAction } from 'react'
 export default function Page () {
   const [created, setCreated] = useState(false)
   const [posts, setPosts] = useState([])
-  const { dict, setLang, ChooseLanguage } = useChooseLanguage({})
+  const { setLang, ChooseLanguage } = useChooseLanguage({})
   const { data: session } = useSession()
 
   useEffect(() => {
