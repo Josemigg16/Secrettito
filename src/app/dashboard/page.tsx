@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react"
 import useChooseLanguage from "../hooks/useChooseLang"
 import Header from "@/components/Header"
 import CreatePost from "@/components/CreatePost"
-import NextUICard from "@/components/postMiniCard"
+import PostMiniCard from "@/components/PostMiniCard"
 import { BarlowCondensed } from "@/fonts/fonts"
 import { useEffect, useState } from "react"
 import type { Post } from "@prisma/client"
@@ -29,19 +29,25 @@ export default function Page() {
     <main
       className={`${BarlowCondensed.className} h-screen bg-ig overflow-hidden`}
     >
-      <Header setLang={setLang} ChooseLanguage={ChooseLanguage} session={session} />
-      <section className="mt-6 grid grid-cols-4 px-10">
-        <article className="col-start-1 col-end-4">
-          Mensajes de la publicacion
+      <Header
+        setLang={setLang}
+        ChooseLanguage={ChooseLanguage}
+        session={session}
+      />
+      <section className="mt-6 block md:grid grid-cols-8 md:px-10 h-[75%]">
+        <article className="col-start-2 col-end-6 border-gray-200 border-dashed border-2 rounded-xl hidden md:flex items-center justify-center">
+          <h2 className="text-center text-6xl text-gray-200 h-fit select-none">
+            Haz click en una publicacion para verla
+          </h2>
         </article>
-        <ul className="px-6 space-y-4 overflow-y-auto max-h-[46em] max-w-[450px]">
+        <ul className="col-start-6 col-end-9 px-6 space-y-4 overflow-y-auto max-w-[450px] mx-auto md:mx-0">
           <CreatePost
             session={session}
             created={created}
             setCreated={setCreated}
           />
-          {posts.map((post: Post) => (
-            <NextUICard
+          {posts?.map((post: Post) => (
+            <PostMiniCard
               key={post.id}
               id={post.id}
               title={post.title}
