@@ -3,7 +3,6 @@ import Header from "@/components/Header"
 import useChooseLanguage from "../hooks/useChooseLang"
 import { useSession } from "next-auth/react"
 import { BarlowCondensed } from "@/fonts/fonts"
-import NextUICard from "@/components/postMiniCard"
 import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
 import PostBigCard from "@/components/postBigCard"
@@ -40,7 +39,7 @@ export default function Page({}) {
         ChooseLanguage={ChooseLanguage}
         session={session}
       />
-      <article className="mx-auto w-[600px] mt-20">
+      <article className="mx-auto max-w-[600px] mt-20 w-5/6 min-w-72">
         <PostBigCard
           id={post.id}
           title={post.title}
