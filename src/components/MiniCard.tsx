@@ -1,24 +1,24 @@
-import { useRouter } from "next/navigation"
+import { useRouter } from 'next/navigation'
 import {
   Card,
   CardHeader,
   CardBody,
   CardFooter,
   Divider,
-  Link,
-} from "@nextui-org/react"
-import type { ExtendedPost } from "@/types"
+  Link
+} from '@nextui-org/react'
+import type { ExtendedPost } from '@/types'
 
 interface Props {
   post: ExtendedPost
 }
 
-export default function PostMiniCard({ post }: Props) {
+export default function PostMiniCard ({ post }: Props) {
   const router = useRouter()
 
   return (
     <button
-    onClick={()=> router.push(`/dashboard/${post?.url}`)}
+    onClick={() => { router.push(`/dashboard?post=${post?.url}`) }}
     className="w-full block">
       <Card id="post-card" className="max-w-[450px] cursor-pointer">
         <CardHeader className="flex gap-3">

@@ -1,8 +1,8 @@
-import { PrismaClient } from "@prisma/client"
-import { NextResponse } from "next/server"
+import { PrismaClient } from '@prisma/client'
+import { NextResponse } from 'next/server'
 const prisma = new PrismaClient()
 
-export async function POST(req) {
+export async function POST (req) {
   const body = await req.json()
   try {
     const post = await prisma.post.create({
@@ -12,20 +12,20 @@ export async function POST(req) {
         url: randomString(),
         author: {
           connect: {
-            email: body.email,
-          },
-        },
-      },
+            email: body.email
+          }
+        }
+      }
     })
 
     return NextResponse.json(post.url)
   } catch (error) {
-    return NextResponse.json({ message: "Post not created" })
+    return NextResponse.json({ message: 'Post not created' })
   }
 }
 
 const randomString = () => {
-  let randomValue = ""
+  let randomValue = ''
 
   for (let i = 0; i < 2; i++) {
     randomValue += Math.floor(Math.random() * 10)

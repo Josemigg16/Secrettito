@@ -1,33 +1,34 @@
-import { usePathname } from "next/navigation"
-import { useEffect, useState } from "react"
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
+import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import {
   Card,
   CardHeader,
   CardBody,
   CardFooter,
   Divider,
-  Link,
-} from "@nextui-org/react"
-import type { Session } from "next-auth"
-import type { ExtenderedPost } from "@/types"
+  Link
+} from '@nextui-org/react'
+import type { Session } from 'next-auth'
+import type { ExtenderedPost } from '@/types'
 
 interface Props {
   session: Session | null
 }
 
-export default function ShowPost({ session }: Props) {
+export default function ShowPost ({ session }: Props) {
   const pathname = usePathname()
-  const [, , url] = pathname?.split("/")
+  const [, , url] = pathname?.split('/')
   const [post, setPost] = useState({} as ExtenderedPost)
 
   useEffect(() => {
     if (session) {
       const getPost = async () => {
         const res = await fetch(`/api/posts/${url}`)
-        const post = await res.json()
+        const post = await res.json() as ExtenderedPost
         setPost(post)
       }
-      getPost()
+      void getPost()
     }
   }, [session])
 

@@ -1,4 +1,4 @@
-import makeURL from "@/helpers/makeURL"
+import makeURL from '@/helpers/makeURL'
 import {
   Modal,
   ModalContent,
@@ -9,13 +9,13 @@ import {
   useDisclosure,
   Input,
   Textarea,
-  Spinner,
-} from "@nextui-org/react"
-import { Session } from "next-auth"
-import { FormEvent, useState } from "react"
-import Link from "next/link"
-import ToClipboard from "@public/icons/ToClipboard"
-import Share from "@public/icons/Share"
+  Spinner
+} from '@nextui-org/react'
+import { type Session } from 'next-auth'
+import { type FormEvent, useState } from 'react'
+import Link from 'next/link'
+import ToClipboard from '@public/icons/ToClipboard'
+import Share from '@public/icons/Share'
 
 interface CreatePostProps {
   classname?: string
@@ -24,26 +24,26 @@ interface CreatePostProps {
   setCreated: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function CreatePost({
+export default function CreatePost ({
   classname,
   session,
   created,
-  setCreated,
+  setCreated
 }: CreatePostProps) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure()
 
-  const [title, setTitle] = useState("")
-  const [content, setContent] = useState("")
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
   const [invalidTextarea, setInvalidTextarea] = useState(false)
   const [creating, setCreating] = useState(false)
-  const [url, setURL] = useState("")
+  const [url, setURL] = useState('')
   const email = session?.user?.email
 
   const clearState = () => {
     setCreating(false)
-    setTitle("")
-    setContent("")
-    setURL("")
+    setTitle('')
+    setContent('')
+    setURL('')
     setInvalidTextarea(false)
   }
 
@@ -60,11 +60,11 @@ export default function CreatePost({
       return
     }
     setCreating(true)
-    const res = await fetch("/api/create-post", {
-      method: "POST",
-      body: JSON.stringify({ title, content, email }),
+    const res = await fetch('/api/create-post', {
+      method: 'POST',
+      body: JSON.stringify({ title, content, email })
     })
-    const postLink = await res.json()
+    const postLink = await res.json() as string
     setCreating(false)
     setURL(makeURL(postLink))
     setCreated(true)
@@ -88,33 +88,37 @@ export default function CreatePost({
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1 text-xl pt-6">
-                {created ? "Publicación creada!" : "Nueva publicación"}
+                {created ? 'Publicación creada!' : 'Nueva publicación'}
               </ModalHeader>
-              {creating ? (
+              {creating
+                ? (
                 <>
                   <Spinner color="default" className="h-[260px]" />
                 </>
-              ) : (
+                  )
+                : (
                 <ModalBody>
-                  {!created ? (
+                  {!created
+                    ? (
                     <form onSubmit={handleSubmit} className="space-y-6 pb-12">
                       <Input
                         value={title}
                         label="Título"
-                        onChange={(e) => setTitle(e.target.value)}
+                        onChange={(e) => { setTitle(e.target.value) }}
                       />
                       <Textarea
                         isInvalid={invalidTextarea}
                         errorMessage={
-                          invalidTextarea ? "Debe llenar este campo" : ""
+                          invalidTextarea ? 'Debe llenar este campo' : ''
                         }
                         value={content}
                         maxLength={150}
                         label="Contenido"
-                        onChange={(e) => setContent(e.target.value)}
+                        onChange={(e) => { setContent(e.target.value) }}
                       />
                     </form>
-                  ) : (
+                      )
+                    : (
                     <>
                       <article>
                         <h3 className="text-lg">
@@ -140,9 +144,9 @@ export default function CreatePost({
                         </footer>
                       </article>
                     </>
-                  )}
+                      )}
                 </ModalBody>
-              )}
+                  )}
               <ModalFooter>
                 <Button
                   isDisabled={creating}
@@ -157,7 +161,7 @@ export default function CreatePost({
                   className="bg-ig hover:gradient-hover text-white"
                   onPress={
                     !created
-                      ? () => handleSubmit(null)
+                      ? async () => { await handleSubmit(null) }
                       : () => {
                           clearState()
                           setCreated(false)

@@ -1,11 +1,11 @@
-"use client"
-import { signOut, useSession } from "next-auth/react"
-import useChooseLanguage from "../../hooks/useChooseLang"
-import Header from "@/components/Header"
-import Link from "next/link"
-import Account from "@public/icons/Account"
-import Trash from "@public/icons/Trash"
-import { BarlowCondensed } from "@/fonts/fonts"
+'use client'
+import { signOut, useSession } from 'next-auth/react'
+import useChooseLanguage from '../../hooks/useChooseLang'
+import Header from '@/components/Header'
+import Link from 'next/link'
+import Account from '@public/icons/Account'
+import Trash from '@public/icons/Trash'
+import { BarlowCondensed } from '@/fonts/fonts'
 import {
   Divider,
   Modal,
@@ -14,11 +14,11 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-  useDisclosure,
-} from "@nextui-org/react"
-import { usePathname } from "next/navigation"
+  useDisclosure
+} from '@nextui-org/react'
+import { usePathname } from 'next/navigation'
 
-export default function Page() {
+export default function Page () {
   const { dict, setLang, ChooseLanguage } = useChooseLanguage({})
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
   const path = usePathname()
@@ -35,7 +35,8 @@ export default function Page() {
           <div className="rounded h-full grid grid-cols-12">
             <article className="w-full col-start-1 col-end-11 p-6 text-3xl">
               <section>
-                {path === "/settings/account" ? (
+                {path === '/settings/account'
+                  ? (
                   <>
                     <p className="mt-4 text-lg">
                       Nombre: {session?.user?.name}
@@ -44,11 +45,13 @@ export default function Page() {
                       Email: {session?.user?.email}
                     </p>
                   </>
-                ) : (
-                  ""
-                )}
+                    )
+                  : (
+                      ''
+                    )}
 
-                {path === "/settings/delete-account" ? (
+                {path === '/settings/delete-account'
+                  ? (
                   <>
                     <Button
                       className="ml-4"
@@ -72,7 +75,7 @@ export default function Page() {
                             <ModalBody>
                               <p>
                                 Al borrar la cuenta, perderas todas tus
-                                publicaciones {""}
+                                publicaciones {''}
                                 <strong>¿Estas seguro?</strong>
                               </p>
                             </ModalBody>
@@ -90,12 +93,14 @@ export default function Page() {
                                   const res = await fetch(
                                     `/api/delete-account/${session?.user?.email}`,
                                     {
-                                      method: "DELETE",
+                                      method: 'DELETE'
                                     }
                                   )
-                                  if (res.ok) signOut({
-                                    callbackUrl: '/'
-                                  })
+                                  if (res.ok) {
+                                    await signOut({
+                                      callbackUrl: '/'
+                                    })
+                                  }
                                 }}
                               >
                                 Delete Account
@@ -106,9 +111,10 @@ export default function Page() {
                       </ModalContent>
                     </Modal>
                   </>
-                ) : (
-                  ""
-                )}
+                    )
+                  : (
+                      ''
+                    )}
               </section>
             </article>
             <aside className="w-full col-start-11 col-end-13 pr-6">

@@ -1,25 +1,25 @@
-"use client"
-import { redirect } from "next/navigation"
-import { useSession } from "next-auth/react"
-import useChooseLanguage from "./hooks/useChooseLang"
-import SessionButton from "@/components/SessionButton"
-import Instagram from "@public/icons/Instagram"
-import Google from "@public/icons/Google"
-import { BarlowCondensed } from "@/fonts/fonts"
-import { Divider } from "@nextui-org/react"
-import { signIn } from "next-auth/react"
+'use client'
+import { redirect } from 'next/navigation'
+import { useSession, signIn } from 'next-auth/react'
+import useChooseLanguage from './hooks/useChooseLang'
+import SessionButton from '@/components/SessionButton'
+import Instagram from '@public/icons/Instagram'
+import Google from '@public/icons/Google'
+import { BarlowCondensed } from '@/fonts/fonts'
+import { Divider } from '@nextui-org/react'
 
-export default function Home() {
+export default function Home () {
   const { setLang, dict, ChooseLanguage } = useChooseLanguage({
-    registerMessage: "",
-    signInWithIg: "",
-    signInWithGg: "",
+    registerMessage: '',
+    signInWithIg: '',
+    signInWithGg: ''
   })
 
   const { data: session } = useSession()
   return (
     <>
-      {!session ? (
+      {!session
+        ? (
         <main
           className={`${BarlowCondensed.className} bg-ig relative h-screen overflow-hidden`}
         >
@@ -36,8 +36,8 @@ export default function Home() {
                 <Divider className="my-8" />
                 <section className="space-y-1">
                   <SessionButton
-                    onClick={() => signIn("google", {
-                      callbackUrl: "/dashboard",
+                    onClick={ async () => await signIn('google', {
+                      callbackUrl: '/dashboard'
                     })}
                     className="w-full h-14 bg-gg gradient-hover transition-background"
                     Icon={Google}
@@ -46,7 +46,7 @@ export default function Home() {
                   </SessionButton>
                   <SessionButton
                     disabled={true}
-                    onClick={() => alert("hello")}
+                    onClick={() => { alert('hello') }}
                     className="w-full h-14 bg-ig-np opacity-50 transition-background"
                     Icon={Instagram}
                   >
@@ -57,15 +57,16 @@ export default function Home() {
             </div>
           </section>
           <small className="absolute bottom-1 text-center w-full text-gray-200 opacity-55">
-            Powered by{" "}
-            <a target="_blank" href="https://github.com/Josemigg16">
+            Powered by{' '}
+            <a target="_blank" href="https://github.com/Josemigg16" rel="noreferrer">
               Josemigg
             </a>
           </small>
         </main>
-      ) : (
-        redirect("/dashboard")
-      )}
+          )
+        : (
+            redirect('/dashboard')
+          )}
     </>
   )
 }

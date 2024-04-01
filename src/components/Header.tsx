@@ -1,10 +1,10 @@
-import { SetStateAction } from "react"
-import { Dispatch } from "react"
-import Link from "next/link"
-import { signOut } from "next-auth/react"
-import { Divider, button } from "@nextui-org/react"
-import FaBars from "@public/icons/FaBars"
-import { Session } from "next-auth"
+import { type SetStateAction, type Dispatch } from 'react'
+
+import Link from 'next/link'
+import { signOut } from 'next-auth/react'
+import { Divider } from '@nextui-org/react'
+import FaBars from '@public/icons/FaBars'
+import { type Session } from 'next-auth'
 
 interface ChooseLanguageArguments {
   className: string
@@ -15,22 +15,22 @@ interface Props {
   setLang: Dispatch<SetStateAction<string>>
   ChooseLanguage: ({
     className,
-    setLang,
+    setLang
   }: ChooseLanguageArguments) => JSX.Element
   className?: string
   session: Session | null
 }
 
-function Header({ setLang, ChooseLanguage, className, session }: Props) {
+function Header ({ setLang, ChooseLanguage, className, session }: Props) {
   const showAside = () => {
-    const $aside = document.querySelector("aside")
-    const $label = document.querySelector("#toggle-aside-label")
-    const $overlay = document.querySelector("#overlay")
+    const $aside = document.querySelector('aside')
+    const $label = document.querySelector('#toggle-aside-label')
+    const $overlay = document.querySelector('#overlay')
     if ($aside) {
-      $aside.classList.toggle("-translate-x-60")
-      if ($label) $label.classList.toggle("-rotate-90")
+      $aside.classList.toggle('-translate-x-60')
+      if ($label) $label.classList.toggle('-rotate-90')
       if ($overlay) {
-        $overlay.classList.toggle("hidden")
+        $overlay.classList.toggle('hidden')
       }
     }
   }
@@ -39,9 +39,9 @@ function Header({ setLang, ChooseLanguage, className, session }: Props) {
       <div
         onClick={() => {
           const $input = document.querySelector(
-            "#toggle-aside"
-          ) as HTMLInputElement
-          $input.checked = false
+            '#toggle-aside'
+          ) satisfies HTMLInputElement | null
+          if ($input) $input.checked = false
           showAside()
         }}
         id="overlay"
@@ -50,7 +50,8 @@ function Header({ setLang, ChooseLanguage, className, session }: Props) {
       <header
         className={`${className} flex justify-center items-center top-0 h-24 w-full gap-3`}
       >
-        {session ? (
+        {session
+          ? (
           <label
             htmlFor="toggle-aside"
             id="toggle-aside-label"
@@ -58,11 +59,12 @@ function Header({ setLang, ChooseLanguage, className, session }: Props) {
           >
             <FaBars className="relative" />
           </label>
-        ) : (
+            )
+          : (
           <></>
-        )}
+            )}
         <Link
-          href={session ? "/dashboard" : "/"}
+          href={session ? '/dashboard' : '/'}
           className="h-full text-4xl uppercase font-bold hidden sm:flex items-center hover:scale-110 transition-transform"
         >
           Secrettito
@@ -71,7 +73,7 @@ function Header({ setLang, ChooseLanguage, className, session }: Props) {
           type="checkbox"
           id="toggle-aside"
           hidden
-          onChange={() => showAside()}
+          onChange={() => { showAside() }}
         />
         <aside className="absolute left-0 top-0 h-screen w-60 bg-green-400 -translate-x-60 transition-transform z-30">
           <ul className="mt-24">
@@ -84,10 +86,11 @@ function Header({ setLang, ChooseLanguage, className, session }: Props) {
             <Divider />
             <button
               className="text-center w-full hover:bg-green-600 py-2"
-              onClick={() =>
-                signOut({
-                  callbackUrl: "/",
+              onClick={async () => {
+                await signOut({
+                  callbackUrl: '/'
                 })
+              }
               }
             >
               Sign Out

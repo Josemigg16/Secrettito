@@ -1,33 +1,36 @@
-"use client"
-import Header from "@/components/Header"
-import useChooseLanguage from "../hooks/useChooseLang"
-import { useSession } from "next-auth/react"
-import { BarlowCondensed } from "@/fonts/fonts"
-import { usePathname } from "next/navigation"
-import { useState, useEffect } from "react"
-import PostBigCard from "@/components/BigCard"
-import type { ExtendedPost } from "@/types"
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
+/* eslint-disable @typescript-eslint/ban-types */
+'use client'
+import Header from '@/components/Header'
+import useChooseLanguage from '../hooks/useChooseLang'
+import { useSession } from 'next-auth/react'
+import { BarlowCondensed } from '@/fonts/fonts'
+import { usePathname } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import PostBigCard from '@/components/BigCard'
+import type { ExtendedPost } from '@/types'
+import type { SetStateAction } from 'react'
 
-export default function Page({}) {
+export default function Page () {
   const { setLang, dict, ChooseLanguage } = useChooseLanguage({
-    registerMessage: "",
-    signInWithIg: "",
-    signInWithGg: "",
+    registerMessage: '',
+    signInWithIg: '',
+    signInWithGg: ''
   })
   const [post, setPost] = useState({} as ExtendedPost)
   console.log(post)
   const pathname = usePathname()
-  const [, postlink] = pathname.split("/")
+  const [, postlink] = pathname.split('/')
   const { data: session } = useSession()
 
   useEffect(() => {
     if (postlink) {
       const getPost = async () => {
         const res = await fetch(`/api/posts/${postlink}`)
-        const post = await res.json()
+        const post = await res.json() as SetStateAction<ExtendedPost>
         setPost(post)
       }
-      getPost()
+      void getPost()
     }
   }, [postlink])
   return (
