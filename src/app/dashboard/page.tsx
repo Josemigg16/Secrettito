@@ -1,30 +1,16 @@
 'use client'
+import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import useChooseLanguage from '../hooks/useChooseLang'
 import Header from '@/components/Header'
 import CreatePost from '@/components/CreatePost'
-import PostMiniCard from '@/components/MiniCard'
+import PostList from '@/components/PostList'
 import { BarlowCondensed } from '@/fonts/fonts'
-import { useEffect, useState } from 'react'
-import type { ExtendedPost } from '@/types'
-import type { SetStateAction } from 'react'
 
 export default function Page () {
   const [created, setCreated] = useState(false)
-  const [posts, setPosts] = useState([])
   const { setLang, ChooseLanguage } = useChooseLanguage({})
   const { data: session } = useSession()
-
-  useEffect(() => {
-    if (session) {
-      const getPosts = async () => {
-        const res = await fetch(`/api/users/${session?.user?.email}/posts`)
-        const data = await res.json() as SetStateAction<never[]>
-        setPosts(data)
-      }
-      void getPosts()
-    }
-  }, [session, created])
 
   return (
     <main
@@ -47,12 +33,7 @@ export default function Page () {
             created={created}
             setCreated={setCreated}
           />
-          {posts?.map((post: ExtendedPost) => (
-            <PostMiniCard
-              key={post.id}
-              post={post}
-            />
-          ))}
+          <PostList session={session} created={created} setCreated={setCreated} />
         </ul>
       </section>
     </main>
