@@ -36,14 +36,14 @@ export default function CreatePost({
   const [content, setContent] = useState("")
   const [invalidTextarea, setInvalidTextarea] = useState(false)
   const [creating, setCreating] = useState(false)
-  const [link, setLink] = useState("")
+  const [url, setURL] = useState("")
   const email = session?.user?.email
 
   const clearState = () => {
     setCreating(false)
     setTitle("")
     setContent("")
-    setLink("")
+    setURL("")
     setInvalidTextarea(false)
   }
 
@@ -66,7 +66,7 @@ export default function CreatePost({
     })
     const postLink = await res.json()
     setCreating(false)
-    setLink(makeURL(postLink))
+    setURL(makeURL(postLink))
     setCreated(true)
   }
 
@@ -124,8 +124,8 @@ export default function CreatePost({
                         <p className="overflow-auto">{content}</p>
                         <p className="flex flex-wrap mt-6">
                           <strong className="mr-2">Ir:</strong>
-                          <Link className="hover:underline" href={link}>
-                            {link}
+                          <Link className="hover:underline" href={url}>
+                            {url}
                           </Link>
                         </p>
                         <footer className="flex flex-col gap-2 mt-3">

@@ -3,12 +3,12 @@ import { NextResponse } from "next/server"
 const prisma = new PrismaClient()
 
 export async function GET(req) {
-  const link = getParams(req.nextUrl.pathname)
+  const url = getParams(req.nextUrl.pathname)
 
   try {
     const post = await prisma.post.findFirst({
       where: {
-        link,
+        url,
       },
       include: {
         author: true,

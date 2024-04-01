@@ -17,13 +17,13 @@ interface Props {
 
 export default function ShowPost({ session }: Props) {
   const pathname = usePathname()
-  const [, , link] = pathname?.split("/")
+  const [, , url] = pathname?.split("/")
   const [post, setPost] = useState({} as ExtenderedPost)
 
   useEffect(() => {
     if (session) {
       const getPost = async () => {
-        const res = await fetch(`/api/posts/${link}`)
+        const res = await fetch(`/api/posts/${url}`)
         const post = await res.json()
         setPost(post)
       }

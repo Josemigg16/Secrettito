@@ -9,7 +9,7 @@ export async function POST(req) {
       data: {
         title: body.title,
         content: body.content,
-        link: randomString(),
+        url: randomString(),
         author: {
           connect: {
             email: body.email,
@@ -18,7 +18,7 @@ export async function POST(req) {
       },
     })
 
-    return NextResponse.json(post.link)
+    return NextResponse.json(post.url)
   } catch (error) {
     return NextResponse.json({ message: "Post not created" })
   }

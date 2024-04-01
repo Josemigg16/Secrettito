@@ -9,12 +9,12 @@ import {
 } from "@nextui-org/react"
 import type { Post } from "@prisma/client"
 
-export default function PostMiniCard({ title, content, link }: Post) {
+export default function PostMiniCard({ title, content, url }: Post) {
   const router = useRouter()
 
   return (
     <button
-    onClick={()=> router.push(`/dashboard/${link}`)}
+    onClick={()=> router.push(`/dashboard/${url}`)}
     className="w-full block">
       <Card id="post-card" className="max-w-[450px] cursor-pointer">
         <CardHeader className="flex gap-3">

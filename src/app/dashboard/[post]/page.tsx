@@ -52,7 +52,7 @@ export default function Page() {
               title={post.title}
               content={post.content}
               authorId={post.authorId}
-              link={post.link}
+              url={post.url}
             />
           ))}
         </ul>
