@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
 import { Divider } from '@nextui-org/react'
 import FaBars from '@public/icons/FaBars'
-import useChooseLanguage from '@/app/hooks/useChooseLang'
+import useChooseLanguage from '@/hooks/useChooseLang'
 
 function Header() {
   const { setLang, ChooseLanguage } = useChooseLanguage({})

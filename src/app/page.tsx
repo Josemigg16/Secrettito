@@ -1,7 +1,7 @@
 'use client'
 import { redirect } from 'next/navigation'
 import { useSession, signIn } from 'next-auth/react'
-import useChooseLanguage from './hooks/useChooseLang'
+import useChooseLanguage from '../hooks/useChooseLang'
 import SessionButton from '@/components/SessionButton'
 import Header from '@/components/Header'
 import Instagram from '@public/icons/Instagram'
