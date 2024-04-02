@@ -7,11 +7,13 @@ import CreatePost from '@/components/CreatePost'
 import PostList from '@/components/PostList'
 import ShowPost from '@/components/ShowPost'
 import { BarlowCondensed } from '@/fonts/fonts'
+import { useInfoPostStore } from '@/stores/infoPostStore'
 
 export default function Page() {
   const { setLang, ChooseLanguage } = useChooseLanguage({})
   const { data: session } = useSession()
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure()
+  const setPostID = useInfoPostStore((state) => state.setID)
 
   return (
     <main
@@ -28,9 +30,12 @@ export default function Page() {
           <Button
             variant="bordered"
             className="mt-4 h-40 w-full rounded-2xl text-3xl text-white hover:scale-105"
-            onPress={onOpen}
+            onPress={() => {
+              onOpen()
+              setPostID('')
+            }}
           >
-            Crear nueva publicacion
+            <p className='text-wrap'>Crear nueva publicacion</p>
           </Button>
           <CreatePost
             isOpen={isOpen}

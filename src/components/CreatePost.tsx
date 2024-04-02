@@ -28,6 +28,7 @@ export default function CreatePost({ isOpen, onOpenChange, onClose }: Props) {
   const created = useCreatedStore((state) => state.created)
   const setCreated = useCreatedStore((state) => state.setCreated)
   const { data: session } = useSession()
+  const id = useInfoPostStore((state) => state.id)
   const title = useInfoPostStore((state) => state.title)
   const setTitle = useInfoPostStore((state) => state.setTitle)
   const content = useInfoPostStore((state) => state.content)
@@ -59,8 +60,8 @@ export default function CreatePost({ isOpen, onOpenChange, onClose }: Props) {
     }
     setCreating(true)
     const res = await fetch('/api/create-post', {
-      method: 'POST',
-      body: JSON.stringify({ title, content, email }),
+      method: id ? 'PUT' : 'POST',
+      body: JSON.stringify({ title, content, email, id }),
     })
     const postLink = (await res.json()) as string
     setCreating(false)

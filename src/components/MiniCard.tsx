@@ -19,10 +19,10 @@ export default function PostMiniCard({ post }: Props) {
   const router = useRouter()
   const searchParams = useSearchParams()
   return (
-    <article className="relative hover:scale-105 transition-transform">
-      <DropdownMiniCard />
+    <article className="relative transition-transform hover:scale-105">
+      <DropdownMiniCard post={post} />
       <Button
-        variant='light'
+        variant="light"
         isDisabled={searchParams.get('post') === post?.url}
         onClick={() => {
           router.push(`/dashboard?post=${post?.url}`)

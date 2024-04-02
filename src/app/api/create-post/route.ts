@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client'
 import { NextResponse } from 'next/server'
 const prisma = new PrismaClient()
 
-export async function POST (req: Request) {
+export async function POST(req: Request) {
   const body = await req.json()
   try {
     const post = await prisma.post.create({
@@ -12,12 +12,30 @@ export async function POST (req: Request) {
         url: randomString(),
         author: {
           connect: {
-            email: body.email
-          }
-        }
-      }
+            email: body.email,
+          },
+        },
+      },
     })
+    return NextResponse.json(post.url)
+  } catch (error) {
+    return NextResponse.json({ message: 'Post not created' })
+  }
+}
 
+export async function PUT(req: Request) {
+  const body = await req.json()
+  console.log(body)
+  try {
+    const post = await prisma.post.update({
+      where: {
+        id: body.id,
+      },
+      data: {
+        title: body.title,
+        content: body.content,
+      },
+    })
     return NextResponse.json(post.url)
   } catch (error) {
     return NextResponse.json({ message: 'Post not created' })

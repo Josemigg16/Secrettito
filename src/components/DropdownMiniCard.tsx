@@ -6,10 +6,25 @@ import {
   Button,
   useDisclosure,
 } from '@nextui-org/react'
-import CreatePost from './CreatePost'
+import CreatePost from '@/components/CreatePost'
+import { useInfoPostStore } from '@/stores/infoPostStore'
+import type { ExtendedPost } from '@/types'
+interface Props {
+  post: ExtendedPost
+}
 
-export default function DropdownMiniCard() {
+export default function DropdownMiniCard({ post }: Props) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure()
+  const setID = useInfoPostStore((state) => state.setID)
+  const setTitle = useInfoPostStore((state) => state.setTitle)
+  const setContent = useInfoPostStore((state) => state.setContent)
+
+  const handleEdit = () => {
+    onOpen()
+    setID(post?.id)
+    setTitle(post?.title)
+    setContent(post?.content ?? '')
+  }
 
   return (
     <article className="absolute right-2 top-2">
@@ -20,7 +35,7 @@ export default function DropdownMiniCard() {
           </Button>
         </DropdownTrigger>
         <DropdownMenu variant="solid">
-          <DropdownItem onPress={onOpen}>Editar</DropdownItem>
+          <DropdownItem onPress={handleEdit}>Editar</DropdownItem>
           <DropdownItem className="text-red-600" color="danger">
             Borrar
           </DropdownItem>

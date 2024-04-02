@@ -1,6 +1,8 @@
 import { create } from 'zustand'
 
 interface infoPostState {
+  id: string
+  setID: (id: string) => void
   title: string
   setTitle: (title: string) => void
   content: string
@@ -8,6 +10,8 @@ interface infoPostState {
 }
 
 export const useInfoPostStore = create<infoPostState>()((set) => ({
+  id: '',
+  setID: (id) => set({ id }),
   title: '',
   setTitle: (title) => set({ title }),
   content: '',

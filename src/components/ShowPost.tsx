@@ -43,7 +43,7 @@ export default function ShowPost({ session }: Props) {
               className="mt-4 rounded-xl bg-white p-6 text-2xl"
               key={message.id}
             >
-              <p key={message?.id}>{message?.content}</p>
+              <p key={message?.id} className='text-pretty'>{message?.content}</p>
             </article>
           ))}
         </article>
