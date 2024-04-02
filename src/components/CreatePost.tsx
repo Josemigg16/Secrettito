@@ -11,27 +11,18 @@ import {
   Textarea,
   Spinner,
 } from '@nextui-org/react'
-import { type Session } from 'next-auth'
+import { useSession } from 'next-auth/react'
 import { type FormEvent, useState } from 'react'
 import Link from 'next/link'
 import ToClipboard from '@public/icons/ToClipboard'
 import Share from '@public/icons/Share'
+import { useCreatedStore } from '@/stores/createdStore'
 
-interface CreatePostProps {
-  classname?: string
-  session: Session | null
-  created: boolean
-  setCreated: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-export default function CreatePost({
-  classname,
-  session,
-  created,
-  setCreated,
-}: CreatePostProps) {
+export default function CreatePost() {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure()
-
+  const created = useCreatedStore((state) => state.created)
+  const setCreated = useCreatedStore((state) => state.setCreated)
+  const { data: session } = useSession()
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [invalidTextarea, setInvalidTextarea] = useState(false)

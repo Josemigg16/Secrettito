@@ -1,23 +1,21 @@
 import { useEffect, useState } from 'react'
 import PostMiniCard from '@/components/MiniCard'
 import type { ExtendedPost } from '@/types'
-import { type Session } from 'next-auth'
-import type { Dispatch, SetStateAction } from 'react'
+import type { SetStateAction } from 'react'
+import { useSession } from 'next-auth/react'
+import { useCreatedStore } from '@/stores/createdStore'
 
-interface Props {
-  session: Session | null
-  created: boolean
-  setCreated: Dispatch<SetStateAction<boolean>>
-}
-
-export default function PostList ({ session, created, setCreated }: Props) {
+export default function PostList() {
   const [posts, setPosts] = useState([])
+  const { data: session } = useSession()
+  const created = useCreatedStore((state) => state.created)
 
   useEffect(() => {
     if (session) {
+      console.log(session?.user?.email)
       const getPosts = async () => {
         const res = await fetch(`/api/users/${session?.user?.email}/posts`)
-        const data = await res.json() as SetStateAction<never[]>
+        const data = (await res.json()) as SetStateAction<never[]>
         setPosts(data)
       }
       void getPosts()
@@ -26,12 +24,9 @@ export default function PostList ({ session, created, setCreated }: Props) {
 
   return (
     <>
-    {posts?.map((post: ExtendedPost) => (
-        <PostMiniCard
-          key={post.id}
-          post={post}
-        />
-    ))}
-      </>
+      {posts.length > 0 && posts?.map((post: ExtendedPost) => (
+        <PostMiniCard key={post.id} post={post} />
+      ))}
+    </>
   )
 }
