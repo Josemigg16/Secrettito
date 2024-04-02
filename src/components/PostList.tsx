@@ -27,11 +27,10 @@ export default function PostList() {
 
   return (
     <>
-      {!fetching && posts.length > 0 ? (
-        posts?.map((post: ExtendedPost) => (
-          <PostMiniCard key={post.id} post={post} />
-        ))
-      ) : (
+      {posts?.map((post: ExtendedPost) => (
+        <PostMiniCard key={post.id} post={post} />
+      ))}
+      {fetching && (
         <>
           <SkeletonPost />
           <SkeletonPost />

@@ -37,6 +37,7 @@ export default function CreatePost({ isOpen, onOpenChange, onClose }: Props) {
   const [invalidTextarea, setInvalidTextarea] = useState(false)
   const [creating, setCreating] = useState(false)
   const [url, setURL] = useState('')
+  const [copied, setCopied] = useState(false)
   const email = session?.user?.email
 
   const clearState = () => {
@@ -45,6 +46,8 @@ export default function CreatePost({ isOpen, onOpenChange, onClose }: Props) {
     setContent('')
     setURL('')
     setInvalidTextarea(false)
+    setInvalidTitle(false)
+    setCopied(false)
   }
 
   const handleClose = () => {
@@ -134,11 +137,28 @@ export default function CreatePost({ isOpen, onOpenChange, onClose }: Props) {
                         </Link>
                       </p>
                       <footer className="mt-3 flex flex-col gap-2">
-                        <Button>
+                        <Button
+                          onPress={async () => {
+                            try {
+                              await navigator.clipboard.writeText(url)
+                              setCopied(true)
+                            } catch (error) {
+                              console.error('No se pudo copiar al portapapeles')
+                            }
+                          }}
+                        >
                           <ToClipboard className="absolute left-6" />
-                          Copiar
+                          {copied ? 'Copiado!' : 'Copiar'}
                         </Button>
-                        <Button>
+                        <Button
+                          onPress={async () => {
+                            await navigator.share({
+                              title,
+                              text: content,
+                              url,
+                            })
+                          }}
+                        >
                           <Share className="absolute left-6" />
                           Compartir
                         </Button>
