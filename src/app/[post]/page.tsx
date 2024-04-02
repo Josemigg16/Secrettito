@@ -1,27 +1,19 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 /* eslint-disable @typescript-eslint/ban-types */
-"use client"
-import Header from "@/components/Header"
-import useChooseLanguage from "../hooks/useChooseLang"
-import { useSession } from "next-auth/react"
-import { BarlowCondensed } from "@/fonts/fonts"
-import { usePathname } from "next/navigation"
-import { useState, useEffect } from "react"
-import PostBigCard from "@/components/BigCard"
-import type { ExtendedPost } from "@/types"
-import type { SetStateAction } from "react"
+'use client'
+import Header from '@/components/Header'
+import { BarlowCondensed } from '@/fonts/fonts'
+import { usePathname } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import PostBigCard from '@/components/BigCard'
+import type { ExtendedPost } from '@/types'
+import type { SetStateAction } from 'react'
 
 export default function Page() {
-  const { setLang, ChooseLanguage } = useChooseLanguage({
-    registerMessage: "",
-    signInWithIg: "",
-    signInWithGg: "",
-  })
   const [post, setPost] = useState({} as ExtendedPost)
   console.log(post)
   const pathname = usePathname()
-  const [, postlink] = pathname.split("/")
-  const { data: session } = useSession()
+  const [, postlink] = pathname.split('/')
 
   useEffect(() => {
     if (postlink) {
@@ -37,11 +29,7 @@ export default function Page() {
     <main
       className={`${BarlowCondensed.className} bg-ig relative h-screen overflow-hidden`}
     >
-      <Header
-        setLang={setLang}
-        ChooseLanguage={ChooseLanguage}
-        session={session}
-      />
+      <Header />
       <article className="mx-auto mt-20 w-5/6 min-w-72 max-w-[600px]">
         <PostBigCard
           id={post.id}
