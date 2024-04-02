@@ -10,6 +10,7 @@ import CreatePost from '@/components/CreatePost'
 import { useInfoPostStore } from '@/stores/infoPostStore'
 import { useCreatedStore } from '@/stores/createdStore'
 import type { ExtendedPost } from '@/types'
+import { useRouter } from 'next/navigation'
 interface Props {
   post: ExtendedPost
 }
@@ -20,6 +21,7 @@ export default function DropdownMiniCard({ post }: Props) {
   const setTitle = useInfoPostStore((state) => state.setTitle)
   const setContent = useInfoPostStore((state) => state.setContent)
   const setCreated = useCreatedStore((state) => state.setCreated)
+  const router = useRouter()
 
   const handleEdit = () => {
     onOpen()
@@ -43,6 +45,9 @@ export default function DropdownMiniCard({ post }: Props) {
           </Button>
         </DropdownTrigger>
         <DropdownMenu variant="solid">
+          <DropdownItem onPress={() => router.push(`/${post.url}`)}>
+            Ir al post
+          </DropdownItem>
           <DropdownItem onPress={handleEdit}>Editar</DropdownItem>
           <DropdownItem
             onPress={handleDelete}

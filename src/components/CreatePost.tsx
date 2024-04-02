@@ -33,6 +33,7 @@ export default function CreatePost({ isOpen, onOpenChange, onClose }: Props) {
   const setTitle = useInfoPostStore((state) => state.setTitle)
   const content = useInfoPostStore((state) => state.content)
   const setContent = useInfoPostStore((state) => state.setContent)
+  const [invalidTitle, setInvalidTitle] = useState(false)
   const [invalidTextarea, setInvalidTextarea] = useState(false)
   const [creating, setCreating] = useState(false)
   const [url, setURL] = useState('')
@@ -54,6 +55,10 @@ export default function CreatePost({ isOpen, onOpenChange, onClose }: Props) {
 
   const handleSubmit = async (e: FormEvent | null) => {
     if (e) e.preventDefault()
+    if (!title) {
+      setInvalidTitle(true)
+      return
+    }
     if (!content) {
       setInvalidTextarea(true)
       return
@@ -90,8 +95,13 @@ export default function CreatePost({ isOpen, onOpenChange, onClose }: Props) {
                 {!created ? (
                   <form onSubmit={handleSubmit} className="space-y-6 pb-12">
                     <Input
+                      isInvalid={invalidTitle}
+                      errorMessage={
+                        invalidTitle ? 'Debe llenar este campo' : ''
+                      }
                       value={title}
                       label="Título"
+                      maxLength={15}
                       onChange={(e) => {
                         setTitle(e.target.value)
                       }}
@@ -102,7 +112,7 @@ export default function CreatePost({ isOpen, onOpenChange, onClose }: Props) {
                         invalidTextarea ? 'Debe llenar este campo' : ''
                       }
                       value={content}
-                      maxLength={150}
+                      maxLength={250}
                       label="Contenido"
                       onChange={(e) => {
                         setContent(e.target.value)

@@ -8,6 +8,7 @@
   --instagram-gradient-nopurple: linear-gradient(to right, #f84960, #ef8b33, #e08422, #e14c0c);
   --instagram-gradient-nopurple-dark: linear-gradient(to right, #C51212, #BD4C2C, #C05B29, #C99036);
   --google--gradient-blue: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+  --skeleton-gradient: linear-gradient(to right, #bbb, #999, #ddd);
 }
 
 *::-webkit-scrollbar {
@@ -32,4 +33,48 @@
 
 .gradient-hover:hover {
   background-position: 100% 0;
+}
+
+.bg-skeleton {
+  background-image: var(--skeleton-gradient);
+  background-size: 300% 100%;
+  animation: bright 2s infinite ease-in-out;
+}
+
+.fromRight {
+  animation: fromRight .5s;
+}
+
+.toRight {
+  animation: toRight .3s;
+}
+
+@keyframes bright {
+
+  0%,
+  100% {
+    background-position: 100% 0
+  }
+
+  50% {
+    background-position: 0;
+  }
+}
+
+@keyframes fromRight {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes toRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-120%);
+  }
 }

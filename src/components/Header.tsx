@@ -1,5 +1,6 @@
+import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
-import { Divider, Link } from '@nextui-org/react'
+import { Divider } from '@nextui-org/react'
 import FaBars from '@public/icons/FaBars'
 import useChooseLanguage from '@/app/hooks/useChooseLang'
 
@@ -45,8 +46,8 @@ function Header() {
         )}
         <Link
           color="foreground"
-          href={session ? '/dashboard' : '/'}
-          className="hidden h-full items-center text-4xl font-bold uppercase transition-transform hover:scale-110 sm:flex"
+          href={session ? '/dashboard?post=null' : '/'}
+          className="hidden h-full items-center text-4xl font-bold uppercase transition-transform hover:scale-110 lg:flex"
         >
           Secrettito
         </Link>
@@ -63,7 +64,7 @@ function Header() {
             <Divider className="2xl:hidden" />
             <Link
               color="foreground"
-              href="/settings/account"
+              href="/dashboard?post=null"
               className="block w-full py-2 text-center transition-transform md:hover:scale-110"
             >
               Inicio

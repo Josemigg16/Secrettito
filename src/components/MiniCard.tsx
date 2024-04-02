@@ -3,10 +3,8 @@ import DropdownMiniCard from '@/components/DropdownMiniCard'
 import {
   Card,
   CardHeader,
-  CardBody,
   CardFooter,
   Divider,
-  Link,
   Button,
 } from '@nextui-org/react'
 import type { ExtendedPost } from '@/types'
@@ -36,19 +34,10 @@ export default function PostMiniCard({ post }: Props) {
             </div>
           </CardHeader>
           <Divider />
-          <CardBody>
-            <p className="text-pretty text-lg">{post.content}</p>
-          </CardBody>
-          <Divider />
           <CardFooter>
-            <Link
-              isExternal
-              showAnchorIcon
-              href={`/${post.url}`}
-            >
-              Visit source code on GitHub.
-            </Link>
+            <p className="text-pretty text-lg break-all">{post.content}</p>
           </CardFooter>
+          <Divider />
         </Card>
       </Button>
     </article>
