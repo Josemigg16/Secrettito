@@ -2,24 +2,19 @@
 import { redirect } from 'next/navigation'
 import { useSession, signIn } from 'next-auth/react'
 import SessionButton from '@/components/SessionButton'
-import Header from '@/components/Header'
 import Instagram from '@public/icons/Instagram'
 import Google from '@public/icons/Google'
-import { BarlowCondensed } from '@/fonts/fonts'
 import { Divider } from '@nextui-org/react'
 import { useLanguageStore } from '@/stores/languageStore'
 
 export default function Home() {
   const dict = useLanguageStore((state) => state.dict)
   const { data: session } = useSession()
-  
+
   return (
     <>
       {!session ? (
-        <main
-          className={`${BarlowCondensed.className} bg-ig relative h-screen overflow-hidden`}
-        >
-          <Header />
+        <>
           <section className="grid h-[70vh] lg:grid-cols-3">
             <div className="col-start-1 col-end-3 hidden flex-col justify-center p-16 text-white text-opacity-85 lg:flex">
               <h1 className="text-9xl">Bienvenido a Secrettito</h1>
@@ -69,7 +64,7 @@ export default function Home() {
               Josemigg
             </a>
           </small>
-        </main>
+        </>
       ) : (
         redirect('/dashboard')
       )}

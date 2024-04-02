@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 /* eslint-disable @typescript-eslint/ban-types */
 'use client'
-import Header from '@/components/Header'
-import { BarlowCondensed } from '@/fonts/fonts'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import PostBigCard from '@/components/BigCard'
@@ -26,19 +24,14 @@ export default function Page() {
     }
   }, [postlink])
   return (
-    <main
-      className={`${BarlowCondensed.className} bg-ig relative h-screen overflow-hidden`}
-    >
-      <Header />
-      <article className="mx-auto w-5/6 min-w-72 max-w-[600px] grid content-center h-[68vh]">
-        <PostBigCard
-          id={post.id}
-          title={post.title}
-          content={post.content}
-          author={post.author}
-          createdAt={post.createdAt}
-        />
-      </article>
-    </main>
+    <article className="mx-auto grid h-[68vh] w-5/6 min-w-72 max-w-[600px] content-center">
+      <PostBigCard
+        id={post.id}
+        title={post.title}
+        content={post.content}
+        author={post.author}
+        createdAt={post.createdAt}
+      />
+    </article>
   )
 }
