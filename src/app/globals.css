@@ -10,6 +10,10 @@
   --google--gradient-blue: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
 }
 
+ul::-webkit-scrollbar, section::-webkit-scrollbar {
+  width: 0px;
+}
+
 .bg-ig {
   background: var(--instagram-gradient);
 }
@@ -25,6 +29,7 @@
 .gradient-hover {
   background-size: 300% 100%;
 }
+
 .gradient-hover:hover {
   background-position: 100% 0;
 }

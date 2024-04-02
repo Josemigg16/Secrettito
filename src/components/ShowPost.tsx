@@ -36,9 +36,11 @@ export default function ShowPost({ session }: Props) {
           </h2>
         </article>
       ) : (
-        <article className="absolute top-0 z-50 col-start-2 col-end-6 mr-20 h-screen w-screen overflow-y-auto bg-black px-4 md:relative md:block md:w-auto md:border-none md:bg-transparent
-        bg-opacity-70">
-          <Link href='/dashboard'>
+        <article
+          className="absolute top-0 z-50 col-start-2 col-end-6 mr-20 h-screen w-screen overflow-y-auto bg-black bg-opacity-70 px-4 md:relative md:block md:h-auto md:w-auto md:border-none
+        md:bg-transparent"
+        >
+          <Link href="/dashboard">
             <QuitIcon className="absolute right-4 top-12 cursor-pointer text-white md:hidden" />
           </Link>
           <header className="mb-12 mt-8 flex justify-between text-7xl text-gray-200 md:mt-0">
