@@ -11,14 +11,13 @@ export default function PostList() {
   const { data: session } = useSession()
   const [fetching, setFetching] = useState(true)
   const created = useCreatedStore((state) => state.created)
-
   useEffect(() => {
     setFetching(true)
     if (session) {
       const getPosts = async () => {
         const res = await fetch(`/api/users/${session?.user?.email}/posts`)
         const data = (await res.json()) as SetStateAction<never[]>
-        setPosts(data)
+        void setPosts(data)
         setFetching(false)
       }
       void getPosts()
@@ -30,6 +29,7 @@ export default function PostList() {
       {posts?.map((post: ExtendedPost) => (
         <PostMiniCard key={post.id} post={post} />
       ))}
+
       {fetching && (
         <>
           <SkeletonPost />

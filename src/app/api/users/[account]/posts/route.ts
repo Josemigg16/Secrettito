@@ -4,7 +4,6 @@ import { type NextRequest, NextResponse } from 'next/server'
 export async function GET (req: NextRequest) {
   const prisma = new PrismaClient()
   const email = getParams(req.nextUrl.pathname)
-
   try {
     const userPosts = await prisma.user.findFirst({
       where: {
