@@ -53,7 +53,7 @@ export default function ShowPost({ session }: Props) {
             Mensajes:
           </header>
           <section id="messagesContainer">
-            {post?.messages?.length === 0 && (
+            {post?.messages.length && (
               <h2 className="text-white text-opacity-80 text-4xl">
                 Aún no hay mensajes para esta publicación
               </h2>
