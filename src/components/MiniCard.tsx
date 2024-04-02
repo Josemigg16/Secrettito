@@ -19,9 +19,10 @@ export default function PostMiniCard({ post }: Props) {
   const router = useRouter()
   const searchParams = useSearchParams()
   return (
-    <article className="relative">
+    <article className="relative hover:scale-105 transition-transform">
       <DropdownMiniCard />
       <Button
+        variant='light'
         isDisabled={searchParams.get('post') === post?.url}
         onClick={() => {
           router.push(`/dashboard?post=${post?.url}`)
@@ -31,12 +32,12 @@ export default function PostMiniCard({ post }: Props) {
         <Card id="post-card" className="max-w-[450px] cursor-pointer">
           <CardHeader className="flex gap-3">
             <div className="flex flex-col">
-              <p className="text-xl">{post.title}</p>
+              <p className="text-3xl">{post.title}</p>
             </div>
           </CardHeader>
           <Divider />
           <CardBody>
-            <p>{post.content}</p>
+            <p className="text-pretty text-lg">{post.content}</p>
           </CardBody>
           <Divider />
           <CardFooter>
