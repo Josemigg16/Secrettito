@@ -8,6 +8,7 @@ import {
 } from '@nextui-org/react'
 import CreatePost from '@/components/CreatePost'
 import { useInfoPostStore } from '@/stores/infoPostStore'
+import { useCreatedStore } from '@/stores/createdStore'
 import type { ExtendedPost } from '@/types'
 interface Props {
   post: ExtendedPost
@@ -18,12 +19,19 @@ export default function DropdownMiniCard({ post }: Props) {
   const setID = useInfoPostStore((state) => state.setID)
   const setTitle = useInfoPostStore((state) => state.setTitle)
   const setContent = useInfoPostStore((state) => state.setContent)
+  const setCreated = useCreatedStore((state) => state.setCreated)
 
   const handleEdit = () => {
     onOpen()
     setID(post?.id)
     setTitle(post?.title)
     setContent(post?.content ?? '')
+  }
+  const handleDelete = async () => {
+    const res = await fetch(`/api/posts/${post.id}`, {
+      method: 'DELETE',
+    })
+    if (res.ok) setCreated(true)
   }
 
   return (
@@ -36,7 +44,11 @@ export default function DropdownMiniCard({ post }: Props) {
         </DropdownTrigger>
         <DropdownMenu variant="solid">
           <DropdownItem onPress={handleEdit}>Editar</DropdownItem>
-          <DropdownItem className="text-red-600" color="danger">
+          <DropdownItem
+            onPress={handleDelete}
+            className="text-red-600"
+            color="danger"
+          >
             Borrar
           </DropdownItem>
         </DropdownMenu>
