@@ -1,14 +1,6 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Divider,
-  Link,
-} from '@nextui-org/react'
 import type { Session } from 'next-auth'
 import type { ExtenderedPost } from '@/types'
 
@@ -42,38 +34,18 @@ export default function ShowPost({ session }: Props) {
           </h2>
         </article>
       ) : (
-        <article className="col-start-2 col-end-6 hidden items-center justify-center rounded-xl border-2 border-dashed border-gray-200 md:flex">
-          <Card className="max-w-[450px] cursor-pointer">
-            <CardHeader className="flex gap-3">
-              <div className="flex flex-col">
-                <p className="text-xl">{post?.title}</p>
-              </div>
-            </CardHeader>
-            <Divider />
-            <CardBody>
-              <p>{post?.content}</p>
-            </CardBody>
-            <CardBody>
-              <h3>Mensajes:</h3>
-              <Divider />
-              {post?.messages?.map((message) => (
-                <>
-                  <p key={message?.id}>{message?.content}</p>
-                  <Divider />
-                </>
-              ))}
-            </CardBody>
-            <Divider />
-            <CardFooter>
-              <Link
-                isExternal
-                showAnchorIcon
-                href="https://github.com/nextui-org/nextui"
-              >
-                Ir a la publicación
-              </Link>
-            </CardFooter>
-          </Card>
+        <article className="col-start-2 col-end-6 mr-20 hidden rounded-xl border-2 border-dashed border-gray-200 md:block md:border-none">
+          <header className="mb-12 flex justify-between text-7xl text-gray-200">
+            Mensajes:
+          </header>
+          {post?.messages?.map((message) => (
+            <article
+              className="mt-4 rounded-xl bg-white p-6 text-2xl"
+              key={message.id}
+            >
+              <p key={message?.id}>{message?.content}</p>
+            </article>
+          ))}
         </article>
       )}
     </>

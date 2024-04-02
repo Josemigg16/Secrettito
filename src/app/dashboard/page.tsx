@@ -22,7 +22,7 @@ export default function Page() {
         ChooseLanguage={ChooseLanguage}
         session={session}
       />
-      <section className="mt-6 block h-[75%] grid-cols-8 md:grid md:px-10">
+      <section className="mt-6 md:mt-20 block h-[75%] grid-cols-8 md:grid md:px-10">
         <ShowPost session={session} />
         <ul className="col-start-6 col-end-9 mx-auto max-w-[450px] space-y-4 overflow-y-auto px-6 md:mx-0">
           <CreatePost
