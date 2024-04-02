@@ -44,7 +44,7 @@ export default function PostMiniCard({ post }: Props) {
             <Link
               isExternal
               showAnchorIcon
-              href="https://github.com/nextui-org/nextui"
+              href={`/${post.url}`}
             >
               Visit source code on GitHub.
             </Link>

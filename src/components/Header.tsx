@@ -1,27 +1,11 @@
-import { type SetStateAction, type Dispatch } from 'react'
-
-import Link from 'next/link'
-import { signOut } from 'next-auth/react'
-import { Divider } from '@nextui-org/react'
+import { signOut, useSession } from 'next-auth/react'
+import { Divider, Link } from '@nextui-org/react'
 import FaBars from '@public/icons/FaBars'
-import { type Session } from 'next-auth'
+import useChooseLanguage from '@/app/hooks/useChooseLang'
 
-interface ChooseLanguageArguments {
-  className: string
-  setLang: Dispatch<SetStateAction<string>>
-}
-
-interface Props {
-  setLang: Dispatch<SetStateAction<string>>
-  ChooseLanguage: ({
-    className,
-    setLang
-  }: ChooseLanguageArguments) => JSX.Element
-  className?: string
-  session: Session | null
-}
-
-function Header ({ setLang, ChooseLanguage, className, session }: Props) {
+function Header() {
+  const { setLang, ChooseLanguage } = useChooseLanguage({})
+  const { data: session } = useSession()
   const showAside = () => {
     const $aside = document.querySelector('aside')
     const $label = document.querySelector('#toggle-aside-label')
@@ -39,33 +23,30 @@ function Header ({ setLang, ChooseLanguage, className, session }: Props) {
       <div
         onClick={() => {
           const $input = document.querySelector(
-            '#toggle-aside'
+            '#toggle-aside',
           ) satisfies HTMLInputElement | null
           if ($input) $input.checked = false
           showAside()
         }}
         id="overlay"
-        className="h-full w-full bg-black opacity-60 top-0 z-20 absolute hidden"
+        className="absolute top-0 z-20 hidden h-full w-full bg-black opacity-70 2xl:bg-transparent"
       ></div>
-      <header
-        className={`${className} flex justify-center items-center top-0 h-24 w-full gap-3`}
-      >
-        {session
-          ? (
+      <header className="top-0 flex h-24 w-full items-center justify-center gap-3">
+        {session ? (
           <label
             htmlFor="toggle-aside"
             id="toggle-aside-label"
-            className="cursor-pointer absolute w-20 h-[4.8rem] transition-[100ms] rounded-full flex items-center left-0 z-50 border-none hover:scale-110"
+            className="absolute left-0 z-50 flex h-[4.8rem] w-20 cursor-pointer items-center rounded-full border-none transition-[100ms] hover:scale-110"
           >
             <FaBars className="relative" />
           </label>
-            )
-          : (
+        ) : (
           <></>
-            )}
+        )}
         <Link
+          color="foreground"
           href={session ? '/dashboard' : '/'}
-          className="h-full text-4xl uppercase font-bold hidden sm:flex items-center hover:scale-110 transition-transform"
+          className="hidden h-full items-center text-4xl font-bold uppercase transition-transform hover:scale-110 sm:flex"
         >
           Secrettito
         </Link>
@@ -73,32 +54,44 @@ function Header ({ setLang, ChooseLanguage, className, session }: Props) {
           type="checkbox"
           id="toggle-aside"
           hidden
-          onChange={() => { showAside() }}
+          onChange={() => {
+            showAside()
+          }}
         />
-        <aside className="absolute left-0 top-0 h-screen w-60 bg-green-400 -translate-x-60 transition-transform z-30">
-          <ul className="mt-24">
+        <aside className="absolute left-0 top-0 z-30 h-screen w-60 -translate-x-60 bg-slate-200 transition-transform transition-background 2xl:flex 2xl:items-center 2xl:bg-transparent">
+          <ul className="mt-32 w-full 2xl:mb-56 2xl:mt-0 [&>*]:text-2xl 2xl:[&>*]:text-4xl 2xl:[&>*]:text-slate-200">
+            <Divider className="2xl:hidden" />
             <Link
+              color="foreground"
               href="/settings/account"
-              className="block w-full text-center hover:bg-green-600 py-2"
+              className="block w-full py-2 text-center transition-transform md:hover:scale-110"
+            >
+              Inicio
+            </Link>
+            <Divider className="2xl:hidden" />
+            <Link
+              color="foreground"
+              href="/settings/account"
+              className="block w-full py-2 text-center transition-transform md:hover:scale-110"
             >
               Configuración
             </Link>
-            <Divider />
+            <Divider className="2xl:hidden" />
             <button
-              className="text-center w-full hover:bg-green-600 py-2"
+              className="w-full py-2 text-center transition-transform hover:opacity-80 md:hover:scale-110"
               onClick={async () => {
                 await signOut({
-                  callbackUrl: '/'
+                  callbackUrl: '/',
                 })
-              }
-              }
+              }}
             >
               Sign Out
             </button>
+            <Divider className="2xl:hidden" />
           </ul>
         </aside>
         <ChooseLanguage
-          className="right-3 absolute hover:scale-110 transition-transform-opacity"
+          className="absolute right-3 transition-transform-opacity md:hover:scale-110"
           setLang={setLang}
         />
       </header>
