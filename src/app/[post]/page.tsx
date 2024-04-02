@@ -48,6 +48,7 @@ export default function Page() {
           title={post.title}
           content={post.content}
           author={post.author}
+          createdAt={post.createdAt}
         />
       </article>
     </main>
