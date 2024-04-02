@@ -10,8 +10,12 @@ export async function GET (req: NextRequest) {
         email
       },
       include: {
-        posts: true
-      }
+        posts: {
+          orderBy: {
+            createdAt: 'desc'
+          }
+        }
+      },
     })
     return NextResponse.json(userPosts?.posts)
   } catch (error) {

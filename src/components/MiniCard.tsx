@@ -17,7 +17,10 @@ export default function PostMiniCard({ post }: Props) {
   const router = useRouter()
   const searchParams = useSearchParams()
   return (
-    <article className="relative transition-transform hover:scale-105">
+    <article
+      id={post.id}
+      className="relative transition-transform hover:scale-105"
+    >
       <DropdownMiniCard post={post} />
       <Button
         variant="light"
@@ -29,13 +32,15 @@ export default function PostMiniCard({ post }: Props) {
       >
         <Card id="post-card" className="max-w-[450px] cursor-pointer">
           <CardHeader className="flex gap-3">
-            <div className="flex flex-col">
-              <p className="text-3xl">{post.title}</p>
+            <div className="flex w-full flex-col">
+              <h3 className="w-2/3 overflow-hidden text-ellipsis text-start text-3xl">
+                {post.title}
+              </h3>
             </div>
           </CardHeader>
           <Divider />
           <CardFooter>
-            <p className="text-pretty text-lg break-all">{post.content}</p>
+            <p className="text-pretty break-all text-lg">{post.content}</p>
           </CardFooter>
           <Divider />
         </Card>

@@ -28,7 +28,7 @@ export default function ShowPost({ session }: Props) {
 
   const handleQuit = () => {
     const messages = document.querySelector('#messagesContainer')
-    messages?.classList.add('toRight')
+    messages?.classList.add('toLeft')
     setTimeout(() => {
       router.push('/dashboard?post=null')
     }, 200)
@@ -53,14 +53,14 @@ export default function ShowPost({ session }: Props) {
             Mensajes:
           </header>
           <section id="messagesContainer">
-            {!post && (
+            {post && post.messages?.length === 0 && (
               <h2 className="text-white text-opacity-80 text-4xl">
                 Aún no hay mensajes para esta publicación
               </h2>
             )}
             {post?.messages?.map((message) => (
               <article
-                className="fromRight mt-4 rounded-2xl bg-white p-4 text-2xl md:p-6 md:text-2xl"
+                className="fromLeft mt-4 rounded-2xl bg-white p-4 text-2xl md:p-6 md:text-2xl"
                 key={message.id}
               >
                 <p key={message?.id} className="text-pretty break-all">

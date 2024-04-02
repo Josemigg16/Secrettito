@@ -9,6 +9,7 @@ import {
 import CreatePost from '@/components/CreatePost'
 import { useInfoPostStore } from '@/stores/infoPostStore'
 import { useCreatedStore } from '@/stores/createdStore'
+import { usePostsStore } from '@/stores/postsStore'
 import makeURL from '@/helpers/makeURL'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -24,6 +25,7 @@ export default function DropdownMiniCard({ post }: Props) {
   const setTitle = useInfoPostStore((state) => state.setTitle)
   const setContent = useInfoPostStore((state) => state.setContent)
   const setCreated = useCreatedStore((state) => state.setCreated)
+  const deletePostState = usePostsStore((state) => state.deletePost)
   const router = useRouter()
   const url = makeURL(post.url)
 
@@ -35,12 +37,18 @@ export default function DropdownMiniCard({ post }: Props) {
     setContent(post?.content ?? '')
   }
   const handleDelete = async () => {
-    const res = await fetch(`/api/posts/${post.id}`, {
-      method: 'DELETE',
-    })
-    if (res.ok) alert('post borrado')
+    document.getElementById(`${post.id}`)?.classList.add('toRight')
+    try {
+      const res = await fetch(`/api/posts/${post.id}`, {
+        method: 'DELETE',
+      })
+      if (res.ok) {
+        deletePostState(post.id)
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
-
   return (
     <article className="absolute right-2 top-2">
       <Dropdown>
@@ -81,7 +89,9 @@ export default function DropdownMiniCard({ post }: Props) {
           </DropdownItem>
           <DropdownItem onPress={handleEdit}>Editar</DropdownItem>
           <DropdownItem
-            onPress={handleDelete}
+            onPress={async () => {
+              await handleDelete()
+            }}
             className="text-red-600"
             color="danger"
           >

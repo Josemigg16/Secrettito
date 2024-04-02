@@ -87,7 +87,7 @@ export default function CreatePost({ isOpen, onOpenChange, onClose }: Props) {
         {(onClose) => (
           <>
             <ModalHeader className="flex flex-col gap-1 pt-6 text-xl">
-              {created ? 'Publicación creada!' : 'Nueva publicación'}
+              {created ? 'Publicación lista!' : 'Tu publicación'}
             </ModalHeader>
             {creating ? (
               <>
@@ -104,7 +104,7 @@ export default function CreatePost({ isOpen, onOpenChange, onClose }: Props) {
                       }
                       value={title}
                       label="Título"
-                      maxLength={15}
+                      maxLength={40}
                       onChange={(e) => {
                         setTitle(e.target.value)
                       }}
@@ -115,7 +115,7 @@ export default function CreatePost({ isOpen, onOpenChange, onClose }: Props) {
                         invalidTextarea ? 'Debe llenar este campo' : ''
                       }
                       value={content}
-                      maxLength={250}
+                      maxLength={300}
                       label="Contenido"
                       onChange={(e) => {
                         setContent(e.target.value)
@@ -191,7 +191,7 @@ export default function CreatePost({ isOpen, onOpenChange, onClose }: Props) {
                       }
                 }
               >
-                Crear Nueva
+                Publicar
               </Button>
             </ModalFooter>
           </>

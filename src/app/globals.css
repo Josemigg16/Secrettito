@@ -41,12 +41,16 @@
   animation: bright 2s infinite ease-in-out;
 }
 
-.fromRight {
-  animation: fromRight .5s;
+.fromLeft {
+  animation: fromLeft .5s forwards;
+}
+
+.toLeft {
+  animation: toLeft .3s forwards;
 }
 
 .toRight {
-  animation: toRight .3s;
+  animation: toRight .3s forwards;
 }
 
 @keyframes bright {
@@ -61,7 +65,7 @@
   }
 }
 
-@keyframes fromRight {
+@keyframes fromLeft {
   0% {
     transform: translateX(-100%);
   }
@@ -70,11 +74,23 @@
     transform: translateX(0);
   }
 }
+
+@keyframes toLeft {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-120%);
+  }
+}
+
 @keyframes toRight {
   0% {
     transform: translateX(0);
   }
+
   100% {
-    transform: translateX(-120%);
+    transform: translateX(120%);
   }
 }
