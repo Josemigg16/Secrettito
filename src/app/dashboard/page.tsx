@@ -28,8 +28,8 @@ export default function Page() {
         <ShowPost session={session} />
         <ul className="col-start-6 col-end-9 mx-auto max-w-[450px] space-y-4 overflow-y-auto px-6 md:mx-0">
           <Button
-            variant="bordered"
-            className="mt-4 h-40 w-full rounded-2xl text-3xl text-white hover:scale-105"
+            variant="light"
+            className="mt-4 h-40 w-full rounded-2xl text-3xl border-2 border-slate-200 text-white hover:scale-105"
             onPress={() => {
               onOpen()
               setPostID('')
