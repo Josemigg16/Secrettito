@@ -30,7 +30,7 @@ export default function Page() {
       className={`${BarlowCondensed.className} bg-ig relative h-screen overflow-hidden`}
     >
       <Header />
-      <article className="mx-auto mt-20 w-5/6 min-w-72 max-w-[600px]">
+      <article className="mx-auto w-5/6 min-w-72 max-w-[600px] grid content-center h-[68vh]">
         <PostBigCard
           id={post.id}
           title={post.title}
