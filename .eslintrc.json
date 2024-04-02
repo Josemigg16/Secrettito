@@ -22,6 +22,7 @@
         "@typescript-eslint/strict-boolean-expressions": "off",
         "@typescript-eslint/no-confusing-void-expression": "off",
         "@typescript-eslint/no-unnecessary-type-assertion": "off",
+        "@typescript-eslint/prefer-optional-chain":"off",
         "semi": "error"
     }
 }
