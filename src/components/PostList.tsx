@@ -12,7 +12,7 @@ export default function PostList() {
 
   useEffect(() => {
     if (session) {
-      console.log(session?.user?.email)
+      console.log(session)
       const getPosts = async () => {
         const res = await fetch(`/api/users/${session?.user?.email}/posts`)
         const data = (await res.json()) as SetStateAction<never[]>
