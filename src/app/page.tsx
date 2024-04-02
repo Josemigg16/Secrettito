@@ -1,22 +1,18 @@
 'use client'
 import { redirect } from 'next/navigation'
 import { useSession, signIn } from 'next-auth/react'
-import useChooseLanguage from '../hooks/useChooseLang'
 import SessionButton from '@/components/SessionButton'
 import Header from '@/components/Header'
 import Instagram from '@public/icons/Instagram'
 import Google from '@public/icons/Google'
 import { BarlowCondensed } from '@/fonts/fonts'
 import { Divider } from '@nextui-org/react'
+import { useLanguageStore } from '@/stores/languageStore'
 
 export default function Home() {
-  const { dict } = useChooseLanguage({
-    registerMessage: '',
-    signInWithIg: '',
-    signInWithGg: '',
-  })
-
+  const dict = useLanguageStore((state) => state.dict)
   const { data: session } = useSession()
+  
   return (
     <>
       {!session ? (
@@ -24,14 +20,14 @@ export default function Home() {
           className={`${BarlowCondensed.className} bg-ig relative h-screen overflow-hidden`}
         >
           <Header />
-          <section className="grid lg:grid-cols-3 h-[70vh]">
+          <section className="grid h-[70vh] lg:grid-cols-3">
             <div className="col-start-1 col-end-3 hidden flex-col justify-center p-16 text-white text-opacity-85 lg:flex">
               <h1 className="text-9xl">Bienvenido a Secrettito</h1>
               <h2 className="ml-16 text-3xl">
                 Crea publicaciones y tus amigos te enviarán mensajes anónimos!
               </h2>
             </div>
-            <div className="h-[65vh] flex items-end justify-center lg:justify-start overflow-auto">
+            <div className="flex h-[65vh] items-end justify-center overflow-auto lg:justify-start">
               <article className="h-96 min-w-[320px] max-w-[350px] scale-85 rounded-lg border-1 border-gray-300 bg-white p-5 shadow-lg sm:scale-100">
                 <h2 className="mt-4 h-[72px] text-center text-3xl font-bold uppercase">
                   {dict.registerMessage}

@@ -8,12 +8,11 @@ import { useLanguageStore } from '@/stores/languageStore'
 
 interface Props {
   className?: string
-  setLang: (lang: string) => void
 }
 
-function ChooseLanguage({ className, setLang }: Props) {
+function ChooseLanguage({ className }: Props) {
   const [isSel, setIsSel] = useState(false)
-
+  const setLang = useLanguageStore((state) => state.setLang)
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const lang = localStorage.getItem('lang')
@@ -49,8 +48,6 @@ function ChooseLanguage({ className, setLang }: Props) {
 
 export default function useChooseLanguage() {
   const lang = useLanguageStore((state) => state.lang)
-  const setLang = useLanguageStore((state) => state.setLang)
-  const dict = useLanguageStore((state) => state.dict)
   const setDict = useLanguageStore((state) => state.setDict)
 
   import(`@/dictionaries/${lang}.json`)
@@ -65,5 +62,5 @@ export default function useChooseLanguage() {
       console.log(e)
     })
 
-  return { dict, setLang, ChooseLanguage }
+  return { ChooseLanguage }
 }

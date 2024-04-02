@@ -5,7 +5,7 @@ import FaBars from '@public/icons/FaBars'
 import useChooseLanguage from '@/hooks/useChooseLang'
 
 function Header() {
-  const { setLang, ChooseLanguage } = useChooseLanguage({})
+  const { ChooseLanguage } = useChooseLanguage()
   const { data: session } = useSession()
   const showAside = () => {
     const $aside = document.querySelector('aside')
@@ -91,10 +91,7 @@ function Header() {
             <Divider className="2xl:hidden" />
           </ul>
         </aside>
-        <ChooseLanguage
-          className="absolute right-3 transition-transform-opacity md:hover:scale-110"
-          setLang={setLang}
-        />
+        <ChooseLanguage className="absolute right-3 transition-transform-opacity md:hover:scale-110" />
       </header>
     </>
   )
