@@ -87,7 +87,7 @@ function Header() {
                 })
               }}
             >
-              Sign Out
+              Cerrar sesión
             </button>
             <Divider className="2xl:hidden" />
           </ul>
