@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 /* eslint-disable @typescript-eslint/ban-types */
 'use client'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import PostBigCard from '@/components/BigCard'
 import type { ExtendedPost } from '@/types'
@@ -9,9 +9,10 @@ import type { SetStateAction } from 'react'
 
 export default function Page() {
   const [post, setPost] = useState({} as ExtendedPost)
-  console.log(post)
   const pathname = usePathname()
+  const [error, setError] = useState(false)
   const [, postlink] = pathname.split('/')
+  const router = useRouter()
 
   useEffect(() => {
     if (postlink) {
@@ -21,8 +22,13 @@ export default function Page() {
         setPost(post)
       }
       void getPost()
+      if (!post.id) setError(true)
     }
   }, [postlink])
+
+  useEffect(() => {
+    if (error) router.push('/404')
+  }, [error])
   return (
     <article className="mx-auto grid h-[68vh] w-5/6 min-w-72 max-w-[600px] content-center">
       <PostBigCard
