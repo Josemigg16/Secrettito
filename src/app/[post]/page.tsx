@@ -5,7 +5,6 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import PostBigCard from '@/components/BigCard'
 import type { ExtendedPost } from '@/types'
-import type { SetStateAction } from 'react'
 
 export default function Page() {
   const [post, setPost] = useState({} as ExtendedPost)
@@ -18,11 +17,11 @@ export default function Page() {
     if (postlink) {
       const getPost = async () => {
         const res = await fetch(`/api/posts/${postlink}`)
-        const post = (await res.json()) as SetStateAction<ExtendedPost>
+        const post = (await res.json()) as ExtendedPost
         setPost(post)
+        if (!post.id) setError(true)
       }
       void getPost()
-      if (!post.id) setError(true)
     }
   }, [postlink])
 
