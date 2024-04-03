@@ -92,7 +92,7 @@ function Header() {
             <Divider className="2xl:hidden" />
           </ul>
         </aside>
-        <ChooseLanguage className="absolute right-3 transition-transform-opacity md:hover:scale-110" />
+        <ChooseLanguage className="hidden right-3 transition-transform-opacity md:hover:scale-110" />
       </header>
     </>
   )
