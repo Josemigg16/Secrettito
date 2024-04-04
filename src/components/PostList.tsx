@@ -13,8 +13,6 @@ export default function PostList() {
   const [fetching, setFetching] = useState(true)
   const created = useCreatedStore((state) => state.created)
 
-  
-
   useEffect(() => {
     setFetching(true)
     if (session) {
@@ -30,7 +28,8 @@ export default function PostList() {
 
   return (
     <>
-      {posts &&
+      {posts !== null &&
+        posts !== undefined &&
         posts?.map((post: ExtendedPost) => (
           <PostMiniCard key={post.id} post={post} />
         ))}
