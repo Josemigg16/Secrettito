@@ -12,7 +12,7 @@ export async function GET (req: NextRequest) {
       include: {
         posts: {
           orderBy: {
-            createdAt: 'desc'
+            createdAt: 'asc'
           }
         }
       },
