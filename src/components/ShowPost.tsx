@@ -58,7 +58,7 @@ export default function ShowPost({ session }: Props) {
                 Aún no hay mensajes para esta publicación
               </h2>
             )}
-            {post?.messages?.map((message) => (
+            {post && post?.messages?.map((message) => (
               <article
                 className="fromLeft mt-4 rounded-2xl bg-white p-4 text-2xl md:p-6 md:text-2xl"
                 key={message.id}
