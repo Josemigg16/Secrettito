@@ -28,8 +28,7 @@ export default function PostList() {
 
   return (
     <>
-      {posts !== null &&
-        posts !== undefined &&
+      {Array.isArray(posts) &&
         posts?.map((post: ExtendedPost) => (
           <PostMiniCard key={post.id} post={post} />
         ))}
