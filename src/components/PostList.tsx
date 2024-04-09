@@ -18,8 +18,8 @@ export default function PostList() {
     if (session) {
       const getPosts = async () => {
         const res = await fetch(`/api/users/${session?.user?.email}/posts`)
-        const data = (await res.json()) as ExtendedPost[]
-        void setPosts(data)
+        const data = await res.json()
+        if (data !== null) void setPosts(data as ExtendedPost[])
         setFetching(false)
       }
       void getPosts()
@@ -28,7 +28,7 @@ export default function PostList() {
 
   return (
     <>
-      {posts as ExtendedPost[] &&
+      {(posts as ExtendedPost[]) &&
         posts?.map((post: ExtendedPost) => (
           <PostMiniCard key={post.id} post={post} />
         ))}
