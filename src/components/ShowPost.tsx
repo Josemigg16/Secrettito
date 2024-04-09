@@ -19,8 +19,8 @@ export default function ShowPost({ session }: Props) {
     if (session) {
       const getPost = async () => {
         const res = await fetch(`/api/posts/${url}`)
-        const post = (await res.json()) as ExtenderedPost
-        setPost(post)
+        const post = (await res.json())
+        if(post != null) setPost(post as ExtenderedPost)
       }
       void getPost()
     }

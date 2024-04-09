@@ -19,7 +19,7 @@ export default function PostList() {
       const getPosts = async () => {
         const res = await fetch(`/api/users/${session?.user?.email}/posts`)
         const data = await res.json()
-        if (data !== null) void setPosts(data as ExtendedPost[])
+        if (data != null) void setPosts(data as ExtendedPost[])
         setFetching(false)
       }
       void getPosts()
